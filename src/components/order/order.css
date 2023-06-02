@@ -1,0 +1,22 @@
+.navbar{
+    background-color: #22668A;
+} 
+
+.active{
+    background-color: #22668A;
+    color: white;
+}
+
+.new{
+    color: black;
+    font-size: 0.83em;
+}
+
+h4{
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.badge-baru{
+    font-size: 0.8rem !important;
+}
