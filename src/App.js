@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
 import Home from "./pages/Home";
 import "../src/App.css";
 import { Login } from "./pages/LoginAdmin";
@@ -8,8 +8,15 @@ import { LoginUser } from "./pages/LoginUser";
 import DashboardAdmin from "./pages/DashboardAdmin";
 import Order from "./pages/Order";
 import Sukses from "./pages/Sukses";
+import axios from "axios";
+import { API_URL2 } from "./utils/constants";
 
 const App = () => {
+  useEffect(() => {
+    axios.get(API_URL2 + "products").then((res) => {
+      console.log(res);
+    });
+  }, []);
   return (
     <Router>
       <Routes>
