@@ -13,8 +13,8 @@ import { API_URL2 } from "./utils/constants";
 
 const App = () => {
   useEffect(() => {
-    axios.get(API_URL2 + "products").then((res) => {
-      console.log(res);
+    axios.get(API_URL2 + "product").then((res) => {
+      // console.log(res);
     });
   }, []);
   return (
@@ -25,7 +25,7 @@ const App = () => {
         <Route path="/Table/:id" element={<LoginUser />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Admin" element={<DashboardAdmin />} />
-        <Route path="/Order/:id" element={<Order />} />
+        <Route path="/Order/:id_tables" element={<Order />} />
         <Route path="/sukses/:id" element={<Sukses />} />
       </Routes>
     </Router>

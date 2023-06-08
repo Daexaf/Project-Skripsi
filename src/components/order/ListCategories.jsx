@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Col, ListGroup } from "react-bootstrap";
 import axios from "axios";
-import { API_URL } from "../../utils/constants";
+import { API_URL, API_URL2 } from "../../utils/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUtensils,
@@ -32,9 +32,9 @@ export default class ListCategories extends Component {
 
   componentDidMount() {
     axios
-      .get(API_URL + "categories")
+      .get(API_URL2 + "categories")
       .then((res) => {
-        const categories = res.data;
+        const categories = res.data.data;
         this.setState({ categories });
       })
       .catch((error) => {
@@ -57,7 +57,7 @@ export default class ListCategories extends Component {
           {categories &&
             categories.map((category) => (
               <ListGroup.Item
-                key={category.id}
+                key={category.id_categories}
                 onClick={() => changeCategory(category.nama)}
                 className={categoryChoose === category.nama && "active"}
                 style={{ cursor: "pointer" }}

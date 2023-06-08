@@ -23,9 +23,6 @@ const Menus = ({ menu, masukKeranjang }) => {
           <Card.Text>Rp. {numberWithCommas(menu.harga)}</Card.Text>
         </Card.Body>
       </Card>
-      {/* <button className="btn btn-danger" onClick={() => hapusSatuan(menu)}>
-        Kurangi
-      </button> */}
     </Col>
   );
 };

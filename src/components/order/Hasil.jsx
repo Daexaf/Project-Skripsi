@@ -65,9 +65,9 @@ export default class Hasil extends Component {
                     </strong>
                   </Col>
                 </Row>
-                {/* {menuKeranjang.product.nama}
+                {menuKeranjang.product.nama}
                 {menuKeranjang.jumlah} <br />
-                {menuKeranjang.total_harga} */}
+                {menuKeranjang.total_harga}
               </ListGroup.Item>
             ))}
             <ModalKeranjang handleClose={this.handleClose} {...this.state} />
