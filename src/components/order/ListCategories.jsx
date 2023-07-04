@@ -10,12 +10,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./order.css";
 
-const Icon = ({ nama }) => {
-  if (nama === "Makanan")
+const Icon = ({ name }) => {
+  if (name === "Popular")
     return <FontAwesomeIcon icon={faUtensils} className="mr-2" />;
-  if (nama === "Minuman")
+  if (name === "Minuman")
     return <FontAwesomeIcon icon={faCoffee} className="mr-1" />;
-  if (nama === "Cemilan")
+  if (name === "Topping")
+    return <FontAwesomeIcon icon={faCheese} className="mr-2" />;
+  if (name === "Cemilan")
     return <FontAwesomeIcon icon={faCheese} className="mr-2" />;
 
   return <FontAwesomeIcon icon={faUtensils} className="mr-2" />;
@@ -58,12 +60,12 @@ export default class ListCategories extends Component {
             categories.map((category) => (
               <ListGroup.Item
                 key={category.id_categories}
-                onClick={() => changeCategory(category.nama)}
-                className={categoryChoose === category.nama && "active"}
+                onClick={() => changeCategory(category.name)}
+                className={categoryChoose === category.name && "active"}
                 style={{ cursor: "pointer" }}
               >
                 <h5>
-                  <Icon nama={category.nama} /> {category.nama}
+                  <Icon name={category.name} /> {category.name}
                 </h5>
               </ListGroup.Item>
             ))}

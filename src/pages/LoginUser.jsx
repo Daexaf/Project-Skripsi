@@ -1,44 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { API_URL } from "../utils/constants";
+import { API_URL2 } from "../utils/constants";
+import { useSelector, useDispatch } from "react-redux";
+import { timeData } from "../app/counterSlice";
 
 export const LoginUser = () => {
   const [name, setName] = useState("");
   const [noTelp, setNoTelp] = useState("");
-  // const [pass, setPass] = useState("");
   const navigate = useNavigate();
   let { id } = useParams();
+  const dispatch = useDispatch();
+  const [currentTime, setCurrentTime] = useState(null);
 
-  const handleSubmitLogin = () => {
+  // const count = useSelector((state) => state.counter.value);
+  // const timeTaken = useSelector((state) => state.counter.timeTaken);
+
+  const handleSubmitLogin = (e) => {
+    e.preventDefault();
+    const currentTime = new Date();
+    setCurrentTime(currentTime);
+    const converse = currentTime.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    });
     let data = {
-      id,
+      table_name: id,
       name,
       no_telp: noTelp,
+      time_start: converse,
     };
-    navigate(`/Home/${id}`);
 
-    // axios
-    //   .get(API_URL + "products?category.nama=" + this.state.categoryChoose)
-    //   .then((res) => {
-    //     const menus = res.data;
-    //     this.setState({ menus });
-    //   })
-    //   .catch((error) => {
-    //     console.log("Error ya ", error);
-    //   });
-
-    axios.put(API_URL + `tables/${id}`, data).then((res) => {
-      // this.props.history.push("/Home");
-      navigate(`/Home/${id}`);
+    dispatch(timeData(Date.now()));
+    axios.post(API_URL2 + `table/`, data).then((res) => {
+      const alamat = res.data.data[0].id_tables;
+      navigate(`/Home/${alamat}`);
       console.log(res);
     });
   };
 
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     console.log(email);
-  //   };
   return (
     <div className="App">
       <div className="auth-form-container">
@@ -51,7 +53,6 @@ export const LoginUser = () => {
           </label>
           <input
             className="p-2 mb-2"
-            // value={email}
             type="text"
             placeholder="Masukkan Nama Anda"
             id="name"
@@ -65,7 +66,6 @@ export const LoginUser = () => {
           </label>
           <input
             className="p-2"
-            // value={pass}
             type="number"
             placeholder="Masukkan Nomor Telepon anda"
             id="phone"
@@ -78,7 +78,7 @@ export const LoginUser = () => {
             type="submit"
             className="btn btn-success submit mb-2"
             value="submit"
-            onClick={() => handleSubmitLogin()}
+            onClick={(e) => handleSubmitLogin(e)}
           >
             Masuk
           </button>

@@ -3,6 +3,9 @@ import { Button, Modal, Form } from "react-bootstrap";
 import numberWithCommas from "../../utils/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import { API_URL2 } from "../../utils/constants";
+import { useParams } from "react-router-dom";
 
 const ModalKeranjang = ({
   showModal,
@@ -10,15 +13,19 @@ const ModalKeranjang = ({
   keranjangDetail,
   jumlah,
 }) => {
+  // const [id_products] = useParams();
+  // axios.get(API_URL2 + "product/" + id_products).then((resProducts) => {
+  //   console.log(resProducts.data.data[0].name, "resProducts");
+  //   console.log(resProducts.data.data[0].harga, "ini harga");
+  //   const name = resProducts.data.data[0].name;
+  //   const harga = resProducts.data.data[0].harga;
   if (keranjangDetail) {
     return (
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {keranjangDetail.keranjang.product.nama}{" "}
-            <strong>
-              (Rp. {numberWithCommas(keranjangDetail.keranjang.product.harga)})
-            </strong>
+            {keranjangDetail.name}{" "}
+            <strong>(Rp. {numberWithCommas(keranjangDetail.harga)})</strong>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -83,6 +90,7 @@ const ModalKeranjang = ({
       </Modal>
     );
   }
+  // });
 };
 
 export default ModalKeranjang;

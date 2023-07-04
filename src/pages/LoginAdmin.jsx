@@ -1,32 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL2 } from "../utils/constants";
+import axios from "axios";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  // const [pass, setPass] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [contoh, setContoh] = useState(false);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    setContoh(true);
+  }, []);
+
+  useEffect(() => {
+    console.log(contoh, "contoh dari login");
+  }, [contoh]);
+
+  const handleLogin = (e) => {
     e.preventDefault();
-    console.log(email);
+
+    const loginData = {
+      username: username,
+      password: password,
+    };
+
+    axios.get(API_URL2 + "admin/").then((res) => {
+      const data = res.data.data;
+      const username = data.filter((e) => {
+        return e.username === loginData.username;
+      });
+      const password = data.filter((e) => {
+        return e.password === loginData.password;
+      });
+      if (username.length && password.length) {
+        navigate("/admin");
+        localStorage.setItem("id_admins", username[0].id_admins);
+      } else if (username.length && !password.length) {
+        alert("lupa password kali");
+      } else if (!username.length && password.length) {
+        alert("lupa username lu");
+      }
+      console.log(username);
+    });
   };
   return (
     <div className="App">
       <div className="auth-form-container">
-        <form onSubmit={handleSubmit} className="login-form text-black">
+        <form onSubmit={handleLogin} className="login-form text-black">
           <h2 className="text-center p-5">
             Selamat datang di Login Admin E-DUREN
           </h2>
-          <label htmlFor="email" className="text-white">
-            Email:
+          <label htmlFor="username" className="text-white">
+            Username:
           </label>
           <input
             className="p-2 mb-2"
             // value={email}
-            type="email"
+            type="text"
             placeholder="Masukkan Email Anda"
-            id="email"
-            name="email"
+            id="username"
+            name="username"
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
           />
           <label htmlFor="password" className="text-white">
             Password:
@@ -38,6 +76,10 @@ export const Login = () => {
             placeholder="****"
             id="password"
             name="password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
           <button type="submit" className="btn btn-success submit mb-2">
             Login

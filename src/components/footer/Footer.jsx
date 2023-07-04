@@ -54,28 +54,33 @@ const Footer = () => {
                   <span>
                     <i className="ri-restaurant-2-line"></i>
                   </span>{" "}
-                  Chef Food
+                  E-Duren
                 </h2>
-                <p>
+                {/* <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
                   facere eligendi laboriosam id exercitationem tempore.
-                </p>
+                </p> */}
               </div>
             </Col>
 
-            <Col lg="3" md="4" sm="6">
+            {/* <Col lg="3" md="4" sm="6">
               <h5 className="footer__link-title">Info Links</h5>
-
               <ListGroup>
                 {footerQuickLinks.map((item, index) => (
-                  <ListGroupItem key={index} className="link__item">
-                    <a href={item.url}>{item.display}</a>
+                  <ListGroupItem
+                    key={index}
+                    className="link__item"
+                    variant="info"
+                  >
+                    <a href={item.url} style={{ textDecoration: "none" }}>
+                      {item.display}
+                    </a>
                   </ListGroupItem>
                 ))}
               </ListGroup>
-            </Col>
+            </Col> */}
 
-            <Col lg="2" md="4" sm="6">
+            {/* <Col lg="2" md="4" sm="6">
               <h5 className="footer__link-title">Quick Links</h5>
 
               <ListGroup>
@@ -103,7 +108,7 @@ const Footer = () => {
                   <i className="ri-phone-line"></i> +880 123 456 7890
                 </ListGroupItem>
               </ListGroup>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </div>

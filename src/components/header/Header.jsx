@@ -1,7 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "./header.css";
 import { Container } from "reactstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { endData } from "../../app/counterSlice";
+import axios from "axios";
+import { API_URL2 } from "../../utils/constants";
 
 const navLinks = [
   {
@@ -20,20 +24,56 @@ const navLinks = [
     display: "Contact",
     url: "#",
   },
-  // {
-  //   display: "Home",
-  //   url: "#",
-  // },
 ];
 
 const Header = () => {
+  const timeTaken = useSelector((state) => state.counter.timeTaken);
   const menuRef = useRef();
   const menuToggle = () => menuRef.current.classList.toggle("active__menu");
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id_tables } = useParams();
+  const dispatch = useDispatch();
+  const [currentTime, setCurrentTime] = useState(null);
+  const [datac, setdatac] = useState(null);
+
+  useEffect(() => {
+    axios.get(API_URL2 + `table/${id_tables}`).then((res) => {
+      console.log(res.data.data[0], "ini ga ada idnya");
+      setdatac(res.data.data[0]);
+    });
+  }, [id_tables]);
+
   const handleOrder = () => {
-    navigate(`/Order/${id}`);
+    dispatch(endData(Date.now()));
+
+    const currentTime = new Date();
+    setCurrentTime(currentTime);
+    const converse = currentTime.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    });
+    let data = {
+      id_tables: datac.id_tables,
+      name: datac.name,
+      no_telp: datac.no_telp,
+      table_name: datac.table_name,
+      time_start: datac.time_start,
+      time_end: converse,
+    };
+
+    console.log(datac, "data");
+
+    // dispatch(timeData(Date.now()));
+    axios.put(API_URL2 + `table/${id_tables}`, data).then((res) => {
+      // navigate(`/Home/${id}`);
+      console.log(res);
+    });
+
+    navigate(`/Order/${id_tables}`);
   };
+  console.log(timeTaken);
 
   return (
     <header className="header">
@@ -45,7 +85,7 @@ const Header = () => {
                 <i className="ri-restaurant-2-line"></i>
               </span>
               {""}
-              Chef Food
+              E-Duren
             </h2>
           </div>
 

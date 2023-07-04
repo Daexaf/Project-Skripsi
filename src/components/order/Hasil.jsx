@@ -43,9 +43,10 @@ export default class Hasil extends Component {
           <ListGroup variant="flush">
             {keranjangs.map((menuKeranjang, index) => (
               <ListGroup.Item
-                key={`${menuKeranjang.product.nama} ${index}`}
+                key={`${menuKeranjang.product.name} ${index}`}
                 onClick={() => this.handleShow(menuKeranjang)}
               >
+                {console.log(menuKeranjang, "ini menu Keranjang")}
                 <Row>
                   <Col xs={2}>
                     {/* <Badge pill bg="success">
@@ -65,7 +66,7 @@ export default class Hasil extends Component {
                     </strong>
                   </Col>
                 </Row>
-                {menuKeranjang.product.nama}
+                {menuKeranjang.product.name}
                 {menuKeranjang.jumlah} <br />
                 {menuKeranjang.total_harga}
               </ListGroup.Item>

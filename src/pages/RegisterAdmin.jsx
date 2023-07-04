@@ -17,7 +17,7 @@ export const Register = () => {
         <form onSubmit={handleSubmit} className="register-form text-black">
           <h1 className="text-center p-5">Silahkan Daftar</h1>
           <label htmlFor="Fullname" className="text-white">
-            Nama
+            Nama :
           </label>
           <input
             className="p-2 mb-2"

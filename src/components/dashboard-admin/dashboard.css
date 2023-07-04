@@ -1,0 +1,7 @@
+.tableBorder{
+    border: 1px solid black;
+}
+
+.z{
+    z-index: 10;
+}
