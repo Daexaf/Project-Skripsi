@@ -3,30 +3,28 @@ import { useNavigate } from "react-router-dom";
 import { Image, ListGroup, Badge, Button, Card } from "react-bootstrap";
 import axios from "axios";
 import "./sukses.css";
-import { API_URL } from "../utils/constants";
+import { API_URL2 } from "../utils/constants";
 import { useParams } from "react-router-dom";
 
 const Sukses = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   let [hasil, setHasil] = useState();
+  const [tableDetail, setTableDetail] = useState();
+  // const table_name = useSelector((state) => state.counter.table_name);
+  // console.log(table_name, "nama table");
 
-  // useEffect(() => {
-  //   axios
-  //     .get(API_URL + "keranjangs")
-  //     .then((res) => {
-  //       const keranjangs = res.data;
-  //       keranjangs.map(function (item) {
-  //         return axios
-  //           .delete(API_URL + "keranjangs/" + item.id)
-  //           .then((res) => console.log(res))
-  //           .catch((error) => console.log(error));
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log("Error yaa ", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios
+      .get(API_URL2 + `table/${id}`)
+      .then((res) => {
+        console.log(res.data.data[0]);
+        setTableDetail(res.data.data[0]);
+      })
+      .catch((error) => {
+        console.log("Error yaa ", error);
+      });
+  }, []);
 
   // useEffect(() => {
   //   axios
@@ -59,8 +57,15 @@ const Sukses = () => {
           <Card.Header className="text-center">
             Restoran Sop Duren 97
           </Card.Header>
-          <Card.Title className="mt-2">pesanan meja #3</Card.Title>
-          <Card.Subtitle className=" text-muted">waktu</Card.Subtitle>
+          <Card.Title className="mt-2">
+            Nama Pemesan {tableDetail?.name}
+          </Card.Title>
+          <Card.Title className="mt-2">
+            pesanan meja #{tableDetail?.table_name}
+          </Card.Title>
+          <Card.Subtitle className=" text-muted">
+            {tableDetail?.time_start}
+          </Card.Subtitle>
           <Card.Text className="text-center text-black">
             Menu yang dipesan
           </Card.Text>
@@ -98,13 +103,24 @@ const Sukses = () => {
                   14
                 </Badge>
               </ListGroup.Item>
+              <Card.Title className="mt-2 ml-3">
+                Total Harga: {tableDetail?.table_name}
+              </Card.Title>
             </ListGroup>
           </ListGroup>
         </Card.Body>
 
-        <Card.Body>
-          <Card.Link href="#">Card Link</Card.Link>
-          <Card.Link href="#">Another Link</Card.Link>
+        <Card.Body className="text-center">
+          <Button
+            variant="primary"
+            className="mr-5"
+            onClick={() => {
+              navigate(`/Order/${id}`);
+            }}
+          >
+            Kembali
+          </Button>{" "}
+          <Button variant="primary">Bayar</Button>{" "}
         </Card.Body>
       </Card>
     </div>

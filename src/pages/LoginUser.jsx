@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { API_URL2 } from "../utils/constants";
 import { useSelector, useDispatch } from "react-redux";
-import { timeData } from "../app/counterSlice";
+import { table_name, timeData } from "../app/counterSlice";
 
 export const LoginUser = () => {
   const [name, setName] = useState("");
@@ -36,6 +36,7 @@ export const LoginUser = () => {
     dispatch(timeData(Date.now()));
     axios.post(API_URL2 + `table/`, data).then((res) => {
       const alamat = res.data.data[0].id_tables;
+      dispatch(table_name(id));
       navigate(`/Home/${alamat}`);
       console.log(res);
     });

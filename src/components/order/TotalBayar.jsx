@@ -4,7 +4,7 @@ import numberWithCommas from "../../utils/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { API_URL } from "../../utils/constants";
+import { API_URL2 } from "../../utils/constants";
 import { Link } from "react-router-dom";
 
 export default class TotalBayar extends Component {
@@ -13,9 +13,9 @@ export default class TotalBayar extends Component {
       total_bayar: totalBayar,
       menus: this.props.keranjangs,
     };
-    axios.post(API_URL + "pesanans", pesanan).then((res) => {
-      this.props.history.push("/sukses");
-    });
+    // axios.post(API_URL2 + "pesanans", pesanan).then((res) => {
+    //   this.props.history.push("/sukses");
+    // });
   };
   render() {
     const totalBayar = this.props.keranjangs.reduce(function (result, item) {

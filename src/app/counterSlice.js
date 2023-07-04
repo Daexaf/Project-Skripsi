@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   value: 0,
   timeTaken: 0,
+  table_name: null,
 };
 
 export const counterSlice = createSlice({
@@ -28,10 +29,13 @@ export const counterSlice = createSlice({
     endData: (state, action) => {
       state.timeTaken = action.payload - state.value;
     },
+    table_name: (state, action) => {
+      state.table_name = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { timeData, endData } = counterSlice.actions;
+export const { timeData, endData, table_name } = counterSlice.actions;
 
 export default counterSlice.reducer;
