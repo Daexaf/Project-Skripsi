@@ -190,15 +190,18 @@ const Order = () => {
   const masukKeranjang = async (value) => {
     const product = await axios.get(API_URL2 + "product/" + value.id_products);
     let keranjangData;
+    // console.log(product, "ini get product");
     let finder;
     try {
       keranjangData = await axios.get(
         API_URL2 + `keranjangs?id_tables=${id_tables}`
       );
-
-      finder = keranjangData.data.data.find((e) => {
-        return e.product === value.id_products;
+      console.log(keranjangData, "keranjang data");
+      finder = Object.values(keranjangData.data.data).find((e) => {
+        // console.log(finder, "finder data");
+        return e.product[0].id_products === value.id_products;
       });
+      console.log(finder, "ini finder 2");
     } catch {
       finder = false;
     }

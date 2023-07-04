@@ -31,6 +31,42 @@ export default class Hasil extends Component {
     });
   };
 
+  tambah = () => {
+    const { keranjangDetail, jumlah } = this.state;
+
+    this.setState({
+      jumlah: jumlah + 1,
+    });
+
+    const totalHarga = keranjangDetail.product[0].harga * (jumlah + 1);
+    this.setState({
+      keranjangDetail: {
+        ...keranjangDetail,
+        jumlah: jumlah + 1,
+        total_harga: totalHarga,
+      },
+    });
+  };
+
+  kurang = () => {
+    const { keranjangDetail, jumlah } = this.state;
+
+    if (jumlah !== 1) {
+      this.setState({
+        jumlah: jumlah - 1,
+      });
+
+      const totalHarga = keranjangDetail.product[0].harga * (jumlah - 1);
+      this.setState({
+        keranjangDetail: {
+          ...keranjangDetail,
+          jumlah: jumlah - 1,
+          total_harga: totalHarga,
+        },
+      });
+    }
+  };
+
   render() {
     const { keranjangs } = this.props;
     return (
@@ -55,9 +91,9 @@ export default class Hasil extends Component {
                     <h5 className="mb-3">{menuKeranjang.jumlah}</h5>
                   </Col>
                   <Col>
-                    <h5>{menuKeranjang.product.nama}</h5>
+                    <h5>{menuKeranjang.product[0].name}</h5>
                     <p className="new">
-                      Rp. {numberWithCommas(menuKeranjang.product.harga)}
+                      Rp. {numberWithCommas(menuKeranjang.product[0].harga)}
                     </p>
                   </Col>
                   <Col>
@@ -66,12 +102,17 @@ export default class Hasil extends Component {
                     </strong>
                   </Col>
                 </Row>
-                {menuKeranjang.product.name}
+                {/* {menuKeranjang.product[0].name}
                 {menuKeranjang.jumlah} <br />
-                {menuKeranjang.total_harga}
+                {menuKeranjang.total_harga} */}
               </ListGroup.Item>
             ))}
-            <ModalKeranjang handleClose={this.handleClose} {...this.state} />
+            <ModalKeranjang
+              handleClose={this.handleClose}
+              {...this.state}
+              tambah={this.tambah}
+              kurang={this.kurang}
+            />
           </ListGroup>
         )}
         <TotalBayar keranjangs={keranjangs} {...this.props} />

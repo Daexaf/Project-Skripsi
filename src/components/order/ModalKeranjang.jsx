@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import numberWithCommas from "../../utils/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { API_URL2 } from "../../utils/constants";
 import { useParams } from "react-router-dom";
@@ -12,62 +12,96 @@ const ModalKeranjang = ({
   handleClose,
   keranjangDetail,
   jumlah,
+  keterangan,
+  tambah,
+  kurang,
 }) => {
-  // const [id_products] = useParams();
-  // axios.get(API_URL2 + "product/" + id_products).then((resProducts) => {
-  //   console.log(resProducts.data.data[0].name, "resProducts");
-  //   console.log(resProducts.data.data[0].harga, "ini harga");
-  //   const name = resProducts.data.data[0].name;
-  //   const harga = resProducts.data.data[0].harga;
+  // console.log(keranjangDetail, "detail");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      jumlah: jumlah,
+      keterangan: keterangan,
+      total_harga: keranjangDetail.product[0].harga * jumlah,
+      product: keranjangDetail.product[0],
+    };
+
+    console.log(keranjangDetail.id_keranjangs, "id keranjang");
+    const id_t = keranjangDetail.id_tables;
+    axios
+      .put(API_URL2 + `keranjangs?id_tables=${id_t}`, data)
+      .then((res) => {
+        console.log("data berhasil disimpan", res);
+      })
+      .catch((error) => {
+        console.log(error, "simpan error");
+      });
+    handleClose();
+  };
+
   if (keranjangDetail) {
+    const { product, total_harga, jumlah } = keranjangDetail;
     return (
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {keranjangDetail.name}{" "}
-            <strong>(Rp. {numberWithCommas(keranjangDetail.harga)})</strong>
+            {product[0].name}{" "}
+            <strong>(Rp. {numberWithCommas(product[0].harga)})</strong>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Total Harga: </Form.Label>
-              <p>
-                <strong>
-                  Rp. {numberWithCommas(keranjangDetail.keranjang.total_harga)}
-                </strong>
+              <p className="text-black">
+                <strong>Rp. {numberWithCommas(total_harga)}</strong>
               </p>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+
+            <Form.Group className="" controlId="exampleForm.ControlInput1">
               <Form.Label>Jumlah :</Form.Label>
-              <br />
-              <Button variant="primary" size="sm" className="ml-4">
-                <FontAwesomeIcon icon={faPlus} />
+              <Button
+                variant="primary"
+                size="sm"
+                className="ml-2 mb-8 mr-2"
+                onClick={() => {
+                  kurang();
+                }}
+              >
+                <FontAwesomeIcon icon={faMinus} />
               </Button>
               <strong>{jumlah}</strong>
-              <Button variant="primary" size="sm" className="mr-4">
-                <FontAwesomeIcon icon={faMinus} />
+              <Button
+                variant="primary"
+                size="sm"
+                className="ml-2 mb-8"
+                onClick={() => {
+                  tambah();
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} />
               </Button>
             </Form.Group>
 
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Email address</Form.Label>
-              <Form.Control as="textarea" rows="3" placeholder="Enter email" />
+            <Form.Group className="" controlId="exampleForm.ControlTextarea1">
+              <Form.Label>Keterangan</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows="3"
+                placeholder="contoh: pedas, ga pake nasi"
+                name="keterangan"
+                defaultValue={keterangan}
+              />
             </Form.Group>
             <Button variant="primary" type="submit">
-              Submit
+              simpan
             </Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button variant="danger" icons={faTrash} onClick={handleClose}>
+            Hapus Pesanan
           </Button>
         </Modal.Footer>
       </Modal>
