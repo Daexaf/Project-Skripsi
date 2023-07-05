@@ -61,7 +61,7 @@
   "devDependencies": {
     "tailwindcss": "^3.3.2"
   },
-  "browser":{
-    "assert":false
+  "browser": {
+    "assert": false
   }
 }

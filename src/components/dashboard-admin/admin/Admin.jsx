@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { API_URL2 } from "../../../utils/constants";
 import ModalAdmin from "./ModalAdmin";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AdminAcc = () => {
   const [viewData, setViewData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+  const [togglePass, setTogglePass] = useState(false);
 
   useEffect(() => {
     axios
@@ -79,7 +81,38 @@ const AdminAcc = () => {
                         {element.email}
                       </td>
                       <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                        {element.password}
+                        {togglePass ? (
+                          <>{element.password}</>
+                        ) : (
+                          <>
+                            {element.password.split("").map(() => {
+                              return "*";
+                            })}
+                          </>
+                        )}
+                        {togglePass ? (
+                          <>
+                            <button
+                              onClick={() => {
+                                setTogglePass(false);
+                              }}
+                            >
+                              tutup
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button
+                              onClick={() => {
+                                setTogglePass(true);
+                              }}
+                            >
+                              lihat
+                            </button>
+                          </>
+                        )}
+
+                        {/* <FontAwesomeIcon icon="fa-solid fa-eye" /> */}
                       </td>
 
                       <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
