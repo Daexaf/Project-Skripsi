@@ -1,41 +1,85 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import numberWithCommas from "../../utils/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { API_URL2 } from "../../utils/constants";
-import { useParams } from "react-router-dom";
 
 const ModalKeranjang = ({
   showModal,
   handleClose,
   keranjangDetail,
   jumlah,
-  keterangan,
   tambah,
   kurang,
+  setKeranjangs,
 }) => {
   // console.log(keranjangDetail, "detail");
+  const [keterangan, setKeterangan] = useState("");
+
+  const handleChangeKeterangan = (event) => {
+    setKeterangan(event.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const id_k = keranjangDetail.id_keranjangs;
+    const id_table = keranjangDetail.id_tables;
+    const id_prod = keranjangDetail.product[0].id_products;
     const data = {
+      id_keranjangs: id_k,
       jumlah: jumlah,
-      keterangan: keterangan,
       total_harga: keranjangDetail.product[0].harga * jumlah,
-      product: keranjangDetail.product[0],
+      product: id_prod,
+      id_tables: id_table,
+      keterangan: keterangan,
     };
 
     console.log(keranjangDetail.id_keranjangs, "id keranjang");
-    const id_t = keranjangDetail.id_tables;
+    console.log(keranjangDetail, "id table");
+
     axios
-      .put(API_URL2 + `keranjangs?id_tables=${id_t}`, data)
+      .put(API_URL2 + `keranjangs/${id_k}`, data)
       .then((res) => {
         console.log("data berhasil disimpan", res);
       })
       .catch((error) => {
         console.log(error, "simpan error");
+      });
+    handleClose();
+
+    axios
+      .get(API_URL2 + `keranjangs?id_tables=${id_table}`)
+      .then((res) => {
+        const keranjangs = res.data.data;
+        setKeranjangs(keranjangs);
+      })
+      .catch((error) => {
+        console.log("Error ya ", error);
+      });
+  };
+
+  const handleHapus = (e) => {
+    const id_k = keranjangDetail.id_keranjangs;
+    const id_table = keranjangDetail.id_tables;
+    axios
+      .delete(API_URL2 + `keranjangs/${id_k}`)
+      .then((res) => {
+        console.log("data berhasil dihapus", res);
+      })
+      .catch((error) => {
+        console.log(error, "simpan error");
+      });
+
+    axios
+      .get(API_URL2 + `keranjangs?id_tables=${id_table}`)
+      .then((res) => {
+        const keranjangs = res.data.data;
+        setKeranjangs(keranjangs);
+      })
+      .catch((error) => {
+        console.log("Error ya ", error);
       });
     handleClose();
   };
@@ -91,7 +135,8 @@ const ModalKeranjang = ({
                 rows="3"
                 placeholder="contoh: pedas, ga pake nasi"
                 name="keterangan"
-                defaultValue={keterangan}
+                value={keterangan}
+                onChange={handleChangeKeterangan}
               />
             </Form.Group>
             <Button variant="primary" type="submit">
@@ -100,7 +145,13 @@ const ModalKeranjang = ({
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" icons={faTrash} onClick={handleClose}>
+          <Button
+            variant="danger"
+            icons={faTrash}
+            onClick={() => {
+              handleHapus();
+            }}
+          >
             Hapus Pesanan
           </Button>
         </Modal.Footer>

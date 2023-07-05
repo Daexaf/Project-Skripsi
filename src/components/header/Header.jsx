@@ -46,21 +46,15 @@ const Header = () => {
   const handleOrder = () => {
     dispatch(endData(Date.now()));
 
-    const currentTime = new Date();
-    setCurrentTime(currentTime);
-    const converse = currentTime.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
-    });
+    const today = new Date();
+    const converse2 = today.toLocaleString();
     let data = {
       id_tables: datac.id_tables,
       name: datac.name,
       no_telp: datac.no_telp,
       table_name: datac.table_name,
       time_start: datac.time_start,
-      time_end: converse,
+      time_end: converse2,
     };
 
     console.log(datac, "data");

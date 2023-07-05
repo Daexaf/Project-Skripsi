@@ -218,6 +218,13 @@ const Order = () => {
         API_URL2 + "keranjangs/" + finder.id_keranjangs,
         keranjang
       );
+      swal({
+        title: "Berhasil Masuk Keranjang",
+        text: "Berhasil tambah menu " + product.data.data[0].name,
+        icon: "success",
+        button: "tutup",
+        timer: 1500,
+      });
       // const oldData = keranjangs.filter((e) => {
       //   console.log(e, "ee");
       //   return e.id !== kerangjang.data.data.id_keranjangs;
@@ -242,6 +249,13 @@ const Order = () => {
         API_URL2 + `keranjangs?id_tables=${id_tables}`
       );
       setKeranjangs(blablabla2.data.data);
+      swal({
+        title: "Berhasil Masuk Keranjang",
+        text: "Berhasil tambah menu " + product.data.data[0].name,
+        icon: "success",
+        button: "tutup",
+        timer: 1500,
+      });
     }
   };
 
@@ -273,7 +287,11 @@ const Order = () => {
                   })}
               </Row>
             </Col>
-            <Hasil keranjangs={keranjangs} idTable={id_tables} />
+            <Hasil
+              keranjangs={keranjangs}
+              idTable={id_tables}
+              setKeranjangs={setKeranjangs}
+            />
           </Row>
         </Container>
       </div>

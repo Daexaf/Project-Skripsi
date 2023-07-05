@@ -5,12 +5,15 @@ import axios from "axios";
 import "./sukses.css";
 import { API_URL2 } from "../utils/constants";
 import { useParams } from "react-router-dom";
+import numberWithCommas from "../utils/utils";
 
 const Sukses = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   let [hasil, setHasil] = useState();
   const [tableDetail, setTableDetail] = useState();
+  const [menu, setMenus] = useState();
+  const [totalBayar, setTotalBayar] = useState(0);
   // const table_name = useSelector((state) => state.counter.table_name);
   // console.log(table_name, "nama table");
 
@@ -24,41 +27,43 @@ const Sukses = () => {
       .catch((error) => {
         console.log("Error yaa ", error);
       });
-  }, []);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(API_URL + `keranjangs?id_tables=${id}`)
-  //     .then((res) => {
-  //       setHasil(res.data);
-  //       console.log(res);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, [id]);
-  // console.log(hasil);
+    axios
+      .get(API_URL2 + `keranjangs?id_tables=${id}`)
+      .then((res) => {
+        console.log(res.data.data, "ini resnya");
+        setMenus(res.data.data);
+      })
+      .catch((error) => {
+        console.log("Error yaa ", error);
+      });
+  }, [id]);
 
-  // const handleSubmit = () => {
-  //   axios
-  //     .delete(API_URL + `keranjangs?id_tables=${id}`)
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  useEffect(() => {
+    const calculateTotalBayar = () => {
+      if (menu) {
+        const total = menu.reduce(
+          (result, item) => result + item.total_harga,
+          0
+        );
+        setTotalBayar(total);
+      }
+    };
+
+    calculateTotalBayar();
+  }, [menu]);
+
+  console.log(menu, "ini data menu");
 
   return (
-    <div className=" items-center flex justify-center h-screen">
+    <div className=" items-center flex justify-center h-full">
       <Card border="primary" style={{ width: "30rem" }} className="mt-10 mb-10">
         <Card.Body>
           <Card.Header className="text-center">
             Restoran Sop Duren 97
           </Card.Header>
           <Card.Title className="mt-2">
-            Nama Pemesan {tableDetail?.name}
+            Nama Pemesan: {tableDetail?.name}
           </Card.Title>
           <Card.Title className="mt-2">
             pesanan meja #{tableDetail?.table_name}
@@ -71,40 +76,31 @@ const Sukses = () => {
           </Card.Text>
           <ListGroup className="list-group-flush">
             <ListGroup as="ol" numbered>
-              <ListGroup.Item
-                as="li"
-                className="d-flex justify-content-between align-items-start"
-              >
-                <div className="ms-2 me-auto">
-                  <div className="fw-bold">Subheading</div>
-                  Cras justo odio
-                  <Badge bg="primary">7</Badge>
-                </div>
-              </ListGroup.Item>
-              <ListGroup.Item
-                as="li"
-                className="d-flex justify-content-between align-items-start"
-              >
-                <div className="ms-2 me-auto">
-                  <div className="fw-bold">Subheading</div>
-                  Cras justo odio
-                </div>
-                <Badge bg="secondary">9</Badge>
-              </ListGroup.Item>
-              <ListGroup.Item
-                as="li"
-                className="d-flex justify-content-between align-items-start"
-              >
-                <div className="ms-2 me-auto">
-                  <div className="fw-bold">Subheading</div>
-                  Cras justo odio
-                </div>
-                <Badge bg="primary" pill>
-                  14
-                </Badge>
-              </ListGroup.Item>
+              {menu &&
+                menu.map((item) => (
+                  <ListGroup.Item
+                    key={item.id_keranjangs}
+                    as="li"
+                    className="d-flex justify-content-between align-items-start"
+                  >
+                    <div className="ms-2 me-auto">
+                      <div className="fw-bold">{item.product[0].name}</div>
+                      {item.keterangan}
+                      <Badge
+                        bg="primary"
+                        className="mt-3 mr-3 text-center"
+                        style={{ width: "20px", height: "20px" }}
+                      >
+                        {item.jumlah}
+                      </Badge>
+                      <p className="text-black">
+                        Rp. {numberWithCommas(item.total_harga)}
+                      </p>
+                    </div>
+                  </ListGroup.Item>
+                ))}
               <Card.Title className="mt-2 ml-3">
-                Total Harga: {tableDetail?.table_name}
+                Total Harga: Rp. {numberWithCommas(totalBayar)}
               </Card.Title>
             </ListGroup>
           </ListGroup>

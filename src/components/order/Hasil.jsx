@@ -68,7 +68,7 @@ export default class Hasil extends Component {
   };
 
   render() {
-    const { keranjangs } = this.props;
+    const { keranjangs, setKeranjangs } = this.props;
     return (
       <Col md={3} mt="2">
         <h4>
@@ -82,7 +82,7 @@ export default class Hasil extends Component {
                 key={`${menuKeranjang.product.name} ${index}`}
                 onClick={() => this.handleShow(menuKeranjang)}
               >
-                {console.log(menuKeranjang, "ini menu Keranjang")}
+                {/* {console.log(menuKeranjang, "ini menu Keranjang")} */}
                 <Row>
                   <Col xs={2}>
                     {/* <Badge pill bg="success">
@@ -92,9 +92,7 @@ export default class Hasil extends Component {
                   </Col>
                   <Col>
                     <h5>{menuKeranjang.product[0].name}</h5>
-                    <p className="new">
-                      Rp. {numberWithCommas(menuKeranjang.product[0].harga)}
-                    </p>
+                    <p className="new">{menuKeranjang.keterangan}</p>
                   </Col>
                   <Col>
                     <strong className="float-right">
@@ -112,6 +110,7 @@ export default class Hasil extends Component {
               {...this.state}
               tambah={this.tambah}
               kurang={this.kurang}
+              setKeranjangs={setKeranjangs}
             />
           </ListGroup>
         )}

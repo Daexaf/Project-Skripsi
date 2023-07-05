@@ -18,19 +18,31 @@ export const LoginUser = () => {
 
   const handleSubmitLogin = (e) => {
     e.preventDefault();
-    const currentTime = new Date();
-    setCurrentTime(currentTime);
-    const converse = currentTime.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
-    });
+    const today = new Date();
+    // const date =
+    //   today.getFullYear() +
+    //   "-" +
+    //   (today.getMonth() + 1) +
+    //   "-" +
+    //   today.getDate();
+    // const currentTime = new Date();
+    // setCurrentTime(currentTime);
+    // const converse = today.toLocaleTimeString([], {
+    //   hour: "2-digit",
+    //   minute: "2-digit",
+    //   second: "2-digit",
+    //   hour12: false,
+    // });
+    const converse2 = today.toLocaleString();
+
+    // setCurrentTime(converse2);
+    console.log(converse2, "waktu");
+
     let data = {
       table_name: id,
       name,
       no_telp: noTelp,
-      time_start: converse,
+      time_start: converse2,
     };
 
     dispatch(timeData(Date.now()));
