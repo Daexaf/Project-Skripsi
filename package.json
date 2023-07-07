@@ -2,6 +2,7 @@
   "name": "e-duren",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://e-duren-site.vercel.app",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
