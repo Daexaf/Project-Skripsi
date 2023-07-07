@@ -15,9 +15,9 @@ const EditProduct = () => {
     id_category: "",
   });
   const { id_products, id_categories } = useParams();
-  let [loading, setLoading] = useState(false);
+  let [, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [percent, setPercent] = useState(0);
+  const [, setPercent] = useState(0);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {

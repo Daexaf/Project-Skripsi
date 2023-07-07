@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+import React from "react";
+import { Navbar, Container } from "react-bootstrap";
 import "./order.css";
 
 const NavbarComponent = () => {

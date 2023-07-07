@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { API_URL2 } from "../../../utils/constants";
 
 const EditTable = () => {
   const [data, setData] = useState([]);
-  const [sentData, setSendData] = useState([]);
   const { id_tables } = useParams();
 
   useEffect(() => {

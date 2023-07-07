@@ -29,7 +29,7 @@ const Header = () => {
   const navigate = useNavigate();
   const { id_tables } = useParams();
   const dispatch = useDispatch();
-  const [datac, setdatac] = useState(null);
+  const [, setdatac] = useState(null);
 
   useEffect(() => {
     axios.get(API_URL2 + `table/${id_tables}`).then((res) => {

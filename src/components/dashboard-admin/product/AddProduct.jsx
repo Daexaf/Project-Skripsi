@@ -4,7 +4,6 @@ import axios from "axios";
 import { API_URL2 } from "../../../utils/constants";
 import storage from "../../../utils/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { DropdownButton, Dropdown } from "react-bootstrap";
 
 const AddProduct = () => {
   const navigate = useNavigate();
