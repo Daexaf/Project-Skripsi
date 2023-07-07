@@ -23,6 +23,7 @@ import AddProduct from "./components/dashboard-admin/product/AddProduct";
 import AddAdmin from "./components/dashboard-admin/admin/AddAdmin";
 import PrivateComponent from "./components/auth/PrivateComponents";
 import FeedbackForm from "./pages/FeedBack";
+import PaymentForm from "./pages/Payment";
 
 const App = () => {
   useEffect(() => {
@@ -75,6 +76,7 @@ const App = () => {
         <Route path="/order/:id_tables" element={<Order />} />
         <Route path="/sukses/:id" element={<Sukses />} />
         <Route path="/feedback/:id" element={<FeedbackForm />} />
+        <Route path="/payment/:id" element={<PaymentForm />} />
       </Routes>
     </Router>
   );

@@ -69,6 +69,7 @@ export default class Hasil extends Component {
 
   render() {
     const { keranjangs, setKeranjangs } = this.props;
+    console.log(keranjangs, "ini keranjangs");
     return (
       <Col md={6} lg={4} xl={3} mt="2">
         <h4>
@@ -88,7 +89,11 @@ export default class Hasil extends Component {
                   </Col>
                   <Col xs={9} sm={7}>
                     <h5>{menuKeranjang.product[0].name}</h5>
-                    <p className="new">{menuKeranjang.keterangan}</p>
+                    {menuKeranjang.keterangan !== "undefined" ? (
+                      <p className="new">{menuKeranjang.keterangan}</p>
+                    ) : (
+                      <></>
+                    )}
                   </Col>
                   <Col sm={3}>
                     <strong className="float-right">
