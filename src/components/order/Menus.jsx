@@ -9,7 +9,7 @@ const Menus = ({ menu, masukKeranjang }) => {
         <Card.Img variant="top" src={menu.gambar} />
         <Card.Body>
           <Card.Title>
-            {menu.name} <strong>({menu.kode})</strong>
+            <strong>{menu.name}</strong>
           </Card.Title>
           <Card.Text>Rp. {numberWithCommas(menu.harga)}</Card.Text>
         </Card.Body>

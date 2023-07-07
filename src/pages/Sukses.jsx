@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Image, ListGroup, Badge, Button, Card } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
+import { ListGroup, Badge, Button, Card } from "react-bootstrap";
 import axios from "axios";
 import "./sukses.css";
 import { API_URL2 } from "../utils/constants";
-import { useParams } from "react-router-dom";
 import numberWithCommas from "../utils/utils";
 
 const Sukses = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  let [hasil, setHasil] = useState();
   const [tableDetail, setTableDetail] = useState();
   const [menu, setMenus] = useState();
   const [totalBayar, setTotalBayar] = useState(0);
@@ -116,7 +114,14 @@ const Sukses = () => {
           >
             Kembali
           </Button>{" "}
-          <Button variant="primary">Bayar</Button>{" "}
+          <Button
+            variant="primary"
+            onClick={() => {
+              navigate(`/feedback/${id}`);
+            }}
+          >
+            Bayar
+          </Button>{" "}
         </Card.Body>
       </Card>
     </div>

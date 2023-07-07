@@ -34,7 +34,7 @@ const Testimonials = () => {
                       </p>
 
                       <h6>Jhon Doe</h6>
-                      <p>Web Developer</p>
+                      <p>Pelanggan</p>
                     </div>
                   </div>
 
@@ -49,7 +49,7 @@ const Testimonials = () => {
                       </p>
 
                       <h6>Jhon Doe</h6>
-                      <p>Web Developer</p>
+                      <p>Pelanggan</p>
                     </div>
                   </div>
 
@@ -64,7 +64,7 @@ const Testimonials = () => {
                       </p>
 
                       <h6>Jhon Doe</h6>
-                      <p>Web Developer</p>
+                      <p>Pelanggan</p>
                     </div>
                   </div>
                 </Slider>

@@ -1,46 +1,46 @@
 import React from "react";
 import "./footer.css";
-import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
-const footerQuickLinks = [
-  {
-    display: "Terms & Conditions",
-    url: "#",
-  },
-  {
-    display: "Privacy Policy",
-    url: "#",
-  },
-  {
-    display: "Return & Refund",
-    url: "#",
-  },
+// const footerQuickLinks = [
+//   {
+//     display: "Terms & Conditions",
+//     url: "#",
+//   },
+//   {
+//     display: "Privacy Policy",
+//     url: "#",
+//   },
+//   {
+//     display: "Return & Refund",
+//     url: "#",
+//   },
 
-  {
-    display: "Payment Method",
-    url: "#",
-  },
-];
+//   {
+//     display: "Payment Method",
+//     url: "#",
+//   },
+// ];
 
-const footerLinks = [
-  {
-    display: "About Us",
-    url: "#",
-  },
-  {
-    display: "Menu",
-    url: "#",
-  },
-  {
-    display: "Recipes",
-    url: "#",
-  },
+// const footerLinks = [
+//   {
+//     display: "About Us",
+//     url: "#",
+//   },
+//   {
+//     display: "Menu",
+//     url: "#",
+//   },
+//   {
+//     display: "Recipes",
+//     url: "#",
+//   },
 
-  {
-    display: "Contact",
-    url: "#",
-  },
-];
+//   {
+//     display: "Contact",
+//     url: "#",
+//   },
+// ];
 
 const Footer = () => {
   return (
@@ -50,12 +50,15 @@ const Footer = () => {
           <Row>
             <Col lg="4" md="4" sm="6">
               <div className="logo">
-                <h2 className=" d-flex align-items-center gap-1 mb-4">
+                <h2 className=" d-flex align-items-center gap-1 mb-4 text-center">
                   <span>
                     <i className="ri-restaurant-2-line"></i>
                   </span>{" "}
                   E-Duren
                 </h2>
+                <p className="">
+                  copyright 2023, developed by human. All rights reserved
+                </p>
                 {/* <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
                   facere eligendi laboriosam id exercitationem tempore.
@@ -113,7 +116,7 @@ const Footer = () => {
         </Container>
       </div>
 
-      <div className="footer__bottom">
+      {/* <div className="footer__bottom">
         <Container>
           <Row>
             <Col lg="12">
@@ -121,7 +124,7 @@ const Footer = () => {
             </Col>
           </Row>
         </Container>
-      </div>
+      </div> */}
     </footer>
   );
 };

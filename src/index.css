@@ -17,8 +17,6 @@ code {
     monospace;
 }
 
-
-
 section{
   background-color: #0A071A;
 }
@@ -33,4 +31,14 @@ section{
 
 .otp-container input {
   @apply !mr-0 flex-1 py-5 outline-none;
+}
+
+
+.hasil{
+  height: 650px;
+  overflow: auto;
+}
+
+.overflow-auto::-webkit-scrollbar{
+  display: none;
 }

@@ -3,16 +3,17 @@ import { Row, Col, Button } from "react-bootstrap";
 import numberWithCommas from "../../utils/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
-import { API_URL2 } from "../../utils/constants";
+// import axios from "axios";
+// import { API_URL2 } from "../../utils/constants";
 import { Link } from "react-router-dom";
+import "./order.css";
 
 export default class TotalBayar extends Component {
   submitTotalBayar = (totalBayar) => {
-    const pesanan = {
-      total_bayar: totalBayar,
-      menus: this.props.keranjangs,
-    };
+    // const pesanan = {
+    //   total_bayar: totalBayar,
+    //   menus: this.props.keranjangs,
+    // };
     // axios.post(API_URL2 + "pesanans", pesanan).then((res) => {
     //   this.props.history.push("/sukses");
     // });
@@ -24,7 +25,7 @@ export default class TotalBayar extends Component {
     return (
       <div className="fixed-bottom">
         <Row>
-          <Col md={{ span: 3, offset: 9 }} className="px-4">
+          <Col md={{ span: 3, offset: 9 }} xs={12} className="px-4 bayar">
             <h4>
               Total Harga: Rp.{" "}
               <strong className="float-right mr-2">

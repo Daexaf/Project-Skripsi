@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Home from "./pages/Home";
 import "../src/App.css";
 import { Login } from "./pages/LoginAdmin";
@@ -22,6 +22,7 @@ import AddCategory from "./components/dashboard-admin/category/AddCategory";
 import AddProduct from "./components/dashboard-admin/product/AddProduct";
 import AddAdmin from "./components/dashboard-admin/admin/AddAdmin";
 import PrivateComponent from "./components/auth/PrivateComponents";
+import FeedbackForm from "./pages/FeedBack";
 
 const App = () => {
   useEffect(() => {
@@ -73,6 +74,7 @@ const App = () => {
         {/* ini untuk halaman */}
         <Route path="/order/:id_tables" element={<Order />} />
         <Route path="/sukses/:id" element={<Sukses />} />
+        <Route path="/feedback/:id" element={<FeedbackForm />} />
       </Routes>
     </Router>
   );

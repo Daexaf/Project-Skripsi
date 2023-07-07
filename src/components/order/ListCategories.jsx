@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { Col, ListGroup } from "react-bootstrap";
 import axios from "axios";
-import { API_URL, API_URL2 } from "../../utils/constants";
+import { API_URL2 } from "../../utils/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUtensils,
   faCoffee,
   faCheese,
+  faIceCream,
+  faBowlFood,
 } from "@fortawesome/free-solid-svg-icons";
 import "./order.css";
 
@@ -19,6 +21,12 @@ const Icon = ({ name }) => {
     return <FontAwesomeIcon icon={faCheese} className="mr-2" />;
   if (name === "Cemilan")
     return <FontAwesomeIcon icon={faCheese} className="mr-2" />;
+  if (name === "Menu Ice Cream")
+    return <FontAwesomeIcon icon={faIceCream} className="mr-2" />;
+  if (name === "Sop Durian Topping")
+    return <FontAwesomeIcon icon={faCheese} className="mr-2" />;
+  if (name === "Menu Rice Bowl")
+    return <FontAwesomeIcon icon={faBowlFood} className="mr-2" />;
 
   return <FontAwesomeIcon icon={faUtensils} className="mr-2" />;
 };

@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 import "./order.css";
 
 const NavbarComponent = () => {
   return (
-    <Navbar variant="dark" expand="lg">
+    <Navbar expand="lg" className="navbar">
       <Container>
-        <Navbar.Brand href="#home">
-          <strong>Kasir</strong> App
+        <Navbar.Brand>
+          <div className="logo">
+            <h2 className="d-flex align-items-center gap-1">
+              <span>
+                <i className="ri-restaurant-2-line"></i>
+              </span>
+              {""}
+              E-Duren
+            </h2>
+          </div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+          {/* <Nav className="mr-auto">
+            <Nav.Link href="">Home</Nav.Link>
             <Nav.Link href="#link">Link</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -25,7 +33,7 @@ const NavbarComponent = () => {
                 Separated link
               </NavDropdown.Item>
             </NavDropdown>
-          </Nav>
+          </Nav> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>

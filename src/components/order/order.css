@@ -1,9 +1,9 @@
 .navbar{
-    background-color: #22668A;
+    background-color: #141124;
 } 
 
 .active{
-    background-color: #22668A;
+    background-color: #141124;
     color: white;
 }
 
@@ -19,4 +19,27 @@ h4{
 
 .badge-baru{
     font-size: 0.8rem !important;
+}
+
+@media only screen and (max-height:1000px){
+    .hasil {
+        max-height: 400px;
+        overflow: auto;
+      }
+}
+
+/* @media only screen and (max-height:769px){
+    .hasil {
+        max-height: 300px;
+        overflow: auto;
+        margin-bottom: 40px;
+      }
+
+      .bayar{
+        margin-top: 50px;
+      }
+} */
+
+.overflow-auto::-webkit-scrollbar{
+    display: none;
 }

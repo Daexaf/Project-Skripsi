@@ -7,7 +7,7 @@ import "./popular-menu.css";
 
 const PopularMenu = () => {
   return (
-    <section className="pt-0">
+    <section className="pt-0" id="popular">
       <Container>
         <Row>
           <Col lg="12" className="mb-5">

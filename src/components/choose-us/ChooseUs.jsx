@@ -5,7 +5,7 @@ import dimsum from "../../assets/images/Fix/cemilan/dimsum.jpeg";
 
 const ChooseUs = () => {
   return (
-    <section>
+    <section id="about">
       <Container>
         <Row>
           <Col lg="6">
@@ -16,10 +16,11 @@ const ChooseUs = () => {
               <h4>Who we are?</h4>
               <h2>Take a look at the benefits we offer you</h2>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Sapiente temporibus perferendis consequatur porro quod molestiae
-                recusandae iusto exercitationem culpa excepturi. Voluptatum amet
-                pariatur, eos ad deserunt dolor provident earum unde!
+                Selamat datang di Restoran Sop Duren 97, tempat di mana sensasi
+                kuliner bertemu dengan kelezatan tak tertandingi. Sejak tahun
+                1997, kami telah menjadi destinasi yang terkenal dalam dunia
+                kuliner, menyajikan hidangan sop duren dengan cita rasa yang
+                autentik dan kualitas yang terjamin.
               </p>
             </div>
             <div className="features mt-4">
@@ -29,7 +30,7 @@ const ChooseUs = () => {
                     <i className="ri-timer-flash-line"></i>
                   </span>
                   <h6>Fast Time Response</h6>
-                  <p>Lorem ipsum dolor sit amet.</p>
+                  <p>pelayanan yang cepat dan baik</p>
                 </div>
 
                 <div className="single__feature">
@@ -37,7 +38,7 @@ const ChooseUs = () => {
                     <i className="ri-money-dollar-circle-line"></i>
                   </span>
                   <h6>Street Price of five star Quality</h6>
-                  <p>Lorem ipsum dolor sit amet.</p>
+                  <p>Kenikmatan bintang lima dengan harga kaki lima.</p>
                 </div>
               </div>
 
@@ -47,15 +48,15 @@ const ChooseUs = () => {
                     <i className="ri-secure-payment-line"></i>
                   </span>
                   <h6>Secure Payment</h6>
-                  <p>Lorem ipsum dolor sit amet.</p>
+                  <p>Pembayaran aman, terpercaya</p>
                 </div>
 
                 <div className="single__feature">
                   <span className="feature__icon-4">
-                    <i className="ri-24-hours-line"></i>
+                    <i className="ri-service-line"></i>
                   </span>
-                  <h6>24/7 Hours Support</h6>
-                  <p>Lorem ipsum dolor sit amet.</p>
+                  <h6>Professional Service</h6>
+                  <p> pelayanan profesional dan ramah kepada pelanggan</p>
                 </div>
               </div>
             </div>

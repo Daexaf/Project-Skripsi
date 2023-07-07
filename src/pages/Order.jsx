@@ -6,18 +6,16 @@ import {
   Menus,
 } from "../components/order/combined";
 import { Row, Col, Container } from "react-bootstrap";
-import { API_URL, API_URL2 } from "../utils/constants";
+import { API_URL2 } from "../utils/constants";
 import axios from "axios";
 import swal from "sweetalert";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 
 const Order = () => {
   let [menus, setMenus] = useState([]);
-  let [categoryChoose, setCategoryChoose] = useState("Cemilan");
+  let [categoryChoose, setCategoryChoose] = useState("Sop Durian Topping");
   let [keranjangs, setKeranjangs] = useState([]);
-  let { id_tables, id_products } = useParams();
-  const timeTaken = useSelector((state) => state.counter.timeTaken);
+  let { id_tables } = useParams();
 
   useEffect(() => {
     axios
@@ -214,7 +212,7 @@ const Order = () => {
         id_keranjangs: finder.id_keranjangs,
       };
 
-      const kerangjang = await axios.put(
+      await axios.put(
         API_URL2 + "keranjangs/" + finder.id_keranjangs,
         keranjang
       );
@@ -244,7 +242,7 @@ const Order = () => {
         product: product.data.data[0].id_products,
         id_tables: id_tables,
       };
-      const keranjang = await axios.post(API_URL2 + "keranjangs", data);
+      await axios.post(API_URL2 + "keranjangs", data);
       const blablabla2 = await axios.get(
         API_URL2 + `keranjangs?id_tables=${id_tables}`
       );

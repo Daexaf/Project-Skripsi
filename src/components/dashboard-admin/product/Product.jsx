@@ -8,6 +8,7 @@ const Product = () => {
   const [viewData, setViewData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     axios
@@ -33,11 +34,39 @@ const Product = () => {
     });
   };
 
+  const filteredData = viewData.filter((element) =>
+    element.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <>
       <div className="py-12 w-100">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div className="flex justify-end m-2 p-2">
+          {/* <div className="flex justify-start m-2 p-2">
+            <Link
+              to={"/admin/product/add/"}
+              className="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white"
+              style={{ textDecoration: "none" }}
+            >
+              pilih kategori
+            </Link>
+          </div> */}
+          <div className="flex justify-start m-2 p-2">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Cari berdasarkan nama"
+              className="mr-5"
+              style={{
+                border: "3px solid #ccc",
+                borderRadius: "4px",
+                padding: "8px",
+              }}
+            />
+            <button className="mr-5" onClick={() => setSearchQuery("")}>
+              Hapus
+            </button>
             <Link
               to={"/admin/product/add/"}
               className="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white"
@@ -72,11 +101,11 @@ const Product = () => {
                 </tr>
               </thead>
               <tbody>
-                {viewData.map((element, index) => (
+                {filteredData.map((element, index) => (
                   <>
                     <tr
                       className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                      key={index}
+                      key={element.id_products}
                     >
                       <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
                         {element.kode}

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 export const Register = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [email] = useState("");
   // const [pass, setPass] = useState("");
   // const [name, setName] = useState("");
   const handleSubmit = (e) => {

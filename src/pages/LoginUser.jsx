@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { API_URL2 } from "../utils/constants";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { table_name, timeData } from "../app/counterSlice";
 
 export const LoginUser = () => {
@@ -11,28 +11,10 @@ export const LoginUser = () => {
   const navigate = useNavigate();
   let { id } = useParams();
   const dispatch = useDispatch();
-  const [currentTime, setCurrentTime] = useState(null);
-
-  // const count = useSelector((state) => state.counter.value);
-  // const timeTaken = useSelector((state) => state.counter.timeTaken);
 
   const handleSubmitLogin = (e) => {
     e.preventDefault();
     const today = new Date();
-    // const date =
-    //   today.getFullYear() +
-    //   "-" +
-    //   (today.getMonth() + 1) +
-    //   "-" +
-    //   today.getDate();
-    // const currentTime = new Date();
-    // setCurrentTime(currentTime);
-    // const converse = today.toLocaleTimeString([], {
-    //   hour: "2-digit",
-    //   minute: "2-digit",
-    //   second: "2-digit",
-    //   hour12: false,
-    // });
     const converse2 = today.toLocaleString();
 
     // setCurrentTime(converse2);

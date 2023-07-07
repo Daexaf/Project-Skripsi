@@ -14,15 +14,11 @@ const navLinks = [
   },
   {
     display: "About",
-    url: "#",
+    url: "#about",
   },
   {
-    display: "Menu",
-    url: "#",
-  },
-  {
-    display: "Contact",
-    url: "#",
+    display: "Popular",
+    url: "#popular",
   },
 ];
 
@@ -33,7 +29,6 @@ const Header = () => {
   const navigate = useNavigate();
   const { id_tables } = useParams();
   const dispatch = useDispatch();
-  const [currentTime, setCurrentTime] = useState(null);
   const [datac, setdatac] = useState(null);
 
   useEffect(() => {
@@ -46,24 +41,24 @@ const Header = () => {
   const handleOrder = () => {
     dispatch(endData(Date.now()));
 
-    const today = new Date();
-    const converse2 = today.toLocaleString();
-    let data = {
-      id_tables: datac.id_tables,
-      name: datac.name,
-      no_telp: datac.no_telp,
-      table_name: datac.table_name,
-      time_start: datac.time_start,
-      time_end: converse2,
-    };
+    // const today = new Date();
+    // const converse2 = today.toLocaleString();
+    // let data = {
+    //   id_tables: datac.id_tables,
+    //   name: datac.name,
+    //   no_telp: datac.no_telp,
+    //   table_name: datac.table_name,
+    //   time_start: datac.time_start,
+    //   // time_end: converse2,
+    // };
 
-    console.log(datac, "data");
+    // console.log(datac, "data");
 
-    // dispatch(timeData(Date.now()));
-    axios.put(API_URL2 + `table/${id_tables}`, data).then((res) => {
-      // navigate(`/Home/${id}`);
-      console.log(res);
-    });
+    // // dispatch(timeData(Date.now()));
+    // axios.put(API_URL2 + `table/${id_tables}`, data).then((res) => {
+    //   // navigate(`/Home/${id}`);
+    //   console.log(res);
+    // });
 
     navigate(`/Order/${id_tables}`);
   };
@@ -94,25 +89,11 @@ const Header = () => {
                   </li>
                 ))}
               </ul>
-
-              <div className="menu__right">
-                <div className="custom__search">
-                  <input type="text" placeholder="Search items" />
-                  <span>
-                    <i className="ri-search-line"></i>
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
 
           <div>
-            {/* <span className="cart__icon">
-              <i className="ri-shopping-basket-fill"></i>
-
-              <span className="badge">2</span>
-            </span> */}
-            <button className="btn btn-danger mb-4 mt-1" onClick={handleOrder}>
+            <button className="btn btn-danger mb-4 mt-4" onClick={handleOrder}>
               Order
             </button>
           </div>

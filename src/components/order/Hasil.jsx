@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ListGroup, Col, Row } from "react-bootstrap";
+import { ListGroup, Col, Row, Card } from "react-bootstrap";
 import numberWithCommas from "../../utils/utils";
 import TotalBayar from "./TotalBayar";
 // import { Col } from "reactstrap";
@@ -70,39 +70,32 @@ export default class Hasil extends Component {
   render() {
     const { keranjangs, setKeranjangs } = this.props;
     return (
-      <Col md={3} mt="2">
+      <Col md={6} lg={4} xl={3} mt="2">
         <h4>
           <strong>Hasil</strong>
         </h4>
         <hr />
-        {keranjangs.length !== 0 && (
+        <Card className="overflow-auto hasil">
           <ListGroup variant="flush">
             {keranjangs.map((menuKeranjang, index) => (
               <ListGroup.Item
                 key={`${menuKeranjang.product.name} ${index}`}
                 onClick={() => this.handleShow(menuKeranjang)}
               >
-                {/* {console.log(menuKeranjang, "ini menu Keranjang")} */}
                 <Row>
-                  <Col xs={2}>
-                    {/* <Badge pill bg="success">
-                      {menuKeranjang.jumlah}
-                    </Badge> */}
+                  <Col xs={3} sm={2}>
                     <h5 className="mb-3">{menuKeranjang.jumlah}</h5>
                   </Col>
-                  <Col>
+                  <Col xs={9} sm={7}>
                     <h5>{menuKeranjang.product[0].name}</h5>
                     <p className="new">{menuKeranjang.keterangan}</p>
                   </Col>
-                  <Col>
+                  <Col sm={3}>
                     <strong className="float-right">
                       Rp. {numberWithCommas(menuKeranjang.total_harga)}
                     </strong>
                   </Col>
                 </Row>
-                {/* {menuKeranjang.product[0].name}
-                {menuKeranjang.jumlah} <br />
-                {menuKeranjang.total_harga} */}
               </ListGroup.Item>
             ))}
             <ModalKeranjang
@@ -113,7 +106,7 @@ export default class Hasil extends Component {
               setKeranjangs={setKeranjangs}
             />
           </ListGroup>
-        )}
+        </Card>
         <TotalBayar keranjangs={keranjangs} {...this.props} />
       </Col>
     );
