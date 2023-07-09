@@ -4,6 +4,7 @@ import axios from "axios";
 import { API_URL2 } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { table_name, timeData } from "../app/counterSlice";
+import "./sukses.css";
 
 export const LoginUser = () => {
   const [name, setName] = useState("");
@@ -39,7 +40,7 @@ export const LoginUser = () => {
   return (
     <div className="App">
       <div className="auth-form-container">
-        <form className="login-form text-black">
+        <form className="login-form">
           <h2 className="text-center p-5">
             Selamat datang di Website Restoran Sop DUREN 97
           </h2>
@@ -47,7 +48,7 @@ export const LoginUser = () => {
             Nama:
           </label>
           <input
-            className="p-2 mb-2"
+            className="p-2 mb-2  text-black"
             type="text"
             placeholder="Masukkan Nama Anda"
             id="name"
@@ -60,7 +61,7 @@ export const LoginUser = () => {
             Nomor Telepon:
           </label>
           <input
-            className="p-2"
+            className="p-2  text-black"
             type="number"
             placeholder="Masukkan Nomor Telepon anda"
             id="phone"

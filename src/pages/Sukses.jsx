@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ListGroup, Badge, Button, Card } from "react-bootstrap";
 import axios from "axios";
 import "./sukses.css";
-import { API_URL2 } from "../utils/constants";
+import { API_URL2, API_URL4 } from "../utils/constants";
 import numberWithCommas from "../utils/utils";
 import { Helmet } from "react-helmet";
 
@@ -13,6 +13,8 @@ const Sukses = () => {
   const [tableDetail, setTableDetail] = useState();
   const [menu, setMenus] = useState();
   const [totalBayar, setTotalBayar] = useState(0);
+  const [customerId, setCustomerId] = useState();
+  const [orderId, setOrderId] = useState();
   // const table_name = useSelector((state) => state.counter.table_name);
   // console.log(table_name, "nama table");
 
@@ -20,7 +22,7 @@ const Sukses = () => {
     axios
       .get(API_URL2 + `table/${id}`)
       .then((res) => {
-        console.log(res.data.data[0]);
+        console.log(res.data.data[0], "ini res table");
         setTableDetail(res.data.data[0]);
       })
       .catch((error) => {
@@ -30,7 +32,7 @@ const Sukses = () => {
     axios
       .get(API_URL2 + `keranjangs?id_tables=${id}`)
       .then((res) => {
-        console.log(res.data.data, "ini resnya");
+        console.log(res.data.data, "ini res keranjang");
         setMenus(res.data.data);
       })
       .catch((error) => {
@@ -54,28 +56,42 @@ const Sukses = () => {
 
   console.log(menu, "ini data menu");
 
-  const handlePayButton = (e) => {
-    window.snap.pay("ffa66f4d-937b-472d-a1d2-77aac7dd6452", {
-      onSuccess: function (result) {
-        /* You may add your own implementation here */
-        alert("payment success!");
-        console.log(result);
-      },
-      onPending: function (result) {
-        /* You may add your own implementation here */
-        alert("wating your payment!");
-        console.log(result);
-      },
-      onError: function (result) {
-        /* You may add your own implementation here */
-        alert("payment failed!");
-        console.log(result);
-      },
-      onClose: function () {
-        /* You may add your own implementation here */
-        alert("you closed the popup without finishing the payment");
-      },
-    });
+  const handlePayButton = async (e) => {
+    let data = {
+      id_tables: id,
+      total_bayar: totalBayar,
+      name: tableDetail.name,
+      no_telp: tableDetail.no_telp,
+    };
+    try {
+      const token = await axios.post(API_URL2 + "/table/checkout", data);
+      console.log(token, "lhooo");
+      const tokenApp = token.data;
+      window.snap.pay(tokenApp, {
+        onSuccess: function (result) {
+          /* You may add your own implementation here */
+          alert("payment success!");
+          console.log(result);
+          navigate(`/feedback/${id}`);
+        },
+        onPending: function (result) {
+          /* You may add your own implementation here */
+          alert("wating your payment!");
+          console.log(result);
+        },
+        onError: function (result) {
+          /* You may add your own implementation here */
+          alert("payment failed!");
+          console.log(result);
+        },
+        onClose: function () {
+          /* You may add your own implementation here */
+          alert("you closed the popup without finishing the payment");
+        },
+      });
+    } catch (err) {
+      console.log("hmmmmmmmmm", err);
+    }
   };
 
   return (
@@ -123,7 +139,11 @@ const Sukses = () => {
                     >
                       <div className="ms-2 me-auto">
                         <div className="fw-bold">{item.product[0].name}</div>
-                        {item.keterangan}
+                        {item.keterangan !== "undefined" ? (
+                          <p className="new">{item.keterangan}</p>
+                        ) : (
+                          <></>
+                        )}
                         <Badge
                           bg="primary"
                           className="mt-3 mr-3 text-center"
