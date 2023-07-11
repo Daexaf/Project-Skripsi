@@ -2,7 +2,6 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 function ModalCategory({ setOpenModal, deleteData, id_categories }) {
-  console.log(id_categories);
   return (
     <>
       <div

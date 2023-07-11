@@ -23,7 +23,6 @@ const EditAdmin = () => {
         setUsername(showData[0].username);
         setEmail(showData[0].email);
         setPassword(showData[0].password);
-        console.log(showData);
       })
       .catch((error) => {
         setLoading(false);

@@ -10,7 +10,7 @@ const PopularMenu = () => {
     <section className="pt-0" id="popular">
       <Container>
         <Row>
-          <Col lg="12" className="mb-5">
+          <Col lg="12" className="mb-5 tulisan">
             <h2 className="popular__menu-title">Popular food menu</h2>
           </Col>
 

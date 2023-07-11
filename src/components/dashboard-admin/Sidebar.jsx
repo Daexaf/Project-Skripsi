@@ -12,7 +12,7 @@ const Sidebar = () => {
           Admin Panel
         </h1>
       </div>
-      <Link to="/Admin/">
+      <Link to="dashboard">
         <div className="icons">
           <span className="flex items-center gap-[15] py-[10px] border-b-[1px] border-[#ededed]/[0.3] ml-2">
             <i className="ri-dashboard-line mb-3"></i>

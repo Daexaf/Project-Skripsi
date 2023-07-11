@@ -18,7 +18,6 @@ const EditCategory = () => {
         setFilterData(showData);
         setLoading(false);
         setInputName(showData[0].name);
-        console.log(showData);
       })
       .catch((error) => {
         setLoading(false);
@@ -28,7 +27,6 @@ const EditCategory = () => {
 
   const handleSubmitData = (e) => {
     e.preventDefault();
-    console.log(id_categories, "ini idnya");
     const updatedData = {
       id_categories: id_categories,
       name: inputName,

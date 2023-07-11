@@ -15,7 +15,6 @@ const Category = () => {
       .then((res) => {
         const showData = res.data.data;
         setViewData(showData);
-        console.log(showData);
       })
       .catch((error) => {
         console.log("Error ya ", error);
@@ -23,7 +22,6 @@ const Category = () => {
   }, []);
 
   const deleteData = (id_categories) => {
-    console.log(id_categories);
     axios.delete(API_URL2 + `categories/${id_categories}`).then((res) => {
       const newValue = viewData.filter((e) => {
         return e.id_categories !== id_categories;

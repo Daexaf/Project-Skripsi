@@ -2,7 +2,6 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 function ModalAdmin({ setOpenModal, deleteData, id_admins }) {
-  console.log(id_admins);
   return (
     <>
       <div

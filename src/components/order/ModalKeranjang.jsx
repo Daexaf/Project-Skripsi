@@ -22,7 +22,7 @@ const ModalKeranjang = ({
     setKeterangan(event.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const id_k = keranjangDetail.id_keranjangs;
     const id_table = keranjangDetail.id_tables;
@@ -39,48 +39,26 @@ const ModalKeranjang = ({
     console.log(keranjangDetail.id_keranjangs, "id keranjang");
     console.log(keranjangDetail, "id table");
 
-    axios
-      .put(API_URL2 + `keranjangs/${id_k}`, data)
-      .then((res) => {
-        console.log("data berhasil disimpan", res);
-      })
-      .catch((error) => {
-        console.log(error, "simpan error");
-      });
-    handleClose();
+    await axios.put(API_URL2 + `keranjangs/${id_k}`, data);
 
-    axios
-      .get(API_URL2 + `keranjangs?id_tables=${id_table}`)
-      .then((res) => {
-        const keranjangs = res.data.data;
-        setKeranjangs(keranjangs);
-      })
-      .catch((error) => {
-        console.log("Error ya ", error);
-      });
+    const updatedData = await axios.get(
+      API_URL2 + `keranjangs?id_tables=${id_table}`
+    );
+    setKeranjangs(updatedData.data.data);
+    console.log(updatedData, "trigger");
+    handleClose();
   };
 
-  const handleHapus = (e) => {
+  const handleHapus = async (e) => {
     const id_k = keranjangDetail.id_keranjangs;
     const id_table = keranjangDetail.id_tables;
-    axios
-      .delete(API_URL2 + `keranjangs/${id_k}`)
-      .then((res) => {
-        console.log("data berhasil dihapus", res);
-      })
-      .catch((error) => {
-        console.log(error, "simpan error");
-      });
 
-    axios
-      .get(API_URL2 + `keranjangs?id_tables=${id_table}`)
-      .then((res) => {
-        const keranjangs = res.data.data;
-        setKeranjangs(keranjangs);
-      })
-      .catch((error) => {
-        console.log("Error ya ", error);
-      });
+    await axios.delete(API_URL2 + `keranjangs/${id_k}`);
+
+    const getData = await axios.get(
+      API_URL2 + `keranjangs?id_tables=${id_table}`
+    );
+    setKeranjangs(getData.data.data);
     handleClose();
   };
 

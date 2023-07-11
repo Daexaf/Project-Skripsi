@@ -21,7 +21,7 @@ const HeroSlider = () => {
           {sliderData.map((item) => (
             <div key={item.id}>
               <div className="slider__wrapper d-flex align-items-center justify-content-between pt-5 mt-4">
-                <div className="slider__content w-50 ps-2">
+                <div className="slider__content w-50 ps-2 tulisan">
                   <h2 className="mb-3 ">{item.title}</h2>
                   <p>{item.desc}</p>
                 </div>

@@ -21,7 +21,6 @@ const AddProduct = () => {
     axios
       .get(API_URL2 + "categories")
       .then((res) => {
-        console.log(res.data.data);
         const kate = res.data.data;
         setAddIdc(kate);
       })

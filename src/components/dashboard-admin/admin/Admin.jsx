@@ -18,7 +18,6 @@ const AdminAcc = () => {
       .then((res) => {
         const showData = res.data.data;
         setViewData(showData);
-        console.log(showData);
       })
       .catch((error) => {
         console.log("Error ya ", error);
@@ -26,7 +25,6 @@ const AdminAcc = () => {
   }, []);
 
   const deleteData = (id_admins) => {
-    console.log(id_admins);
     axios.delete(API_URL2 + `admin/${id_admins}`).then((res) => {
       const newValue = viewData.filter((e) => {
         return e.id_admins !== id_admins;

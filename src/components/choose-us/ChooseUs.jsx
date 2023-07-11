@@ -14,7 +14,9 @@ const ChooseUs = () => {
           <Col lg="6" md="6">
             <div className="choose__content">
               <h4>Who we are?</h4>
-              <h2>Take a look at the benefits we offer you</h2>
+              <h2 className="tulisan">
+                Take a look at the benefits we offer you
+              </h2>
               <p>
                 Selamat datang di Restoran Sop Duren 97, tempat di mana sensasi
                 kuliner bertemu dengan kelezatan tak tertandingi. Sejak tahun

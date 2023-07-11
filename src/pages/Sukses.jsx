@@ -13,16 +13,12 @@ const Sukses = () => {
   const [tableDetail, setTableDetail] = useState();
   const [menu, setMenus] = useState();
   const [totalBayar, setTotalBayar] = useState(0);
-  const [customerId, setCustomerId] = useState();
-  const [orderId, setOrderId] = useState();
-  // const table_name = useSelector((state) => state.counter.table_name);
-  // console.log(table_name, "nama table");
+  const [status, setStatus] = useState(false);
 
   useEffect(() => {
     axios
       .get(API_URL2 + `table/${id}`)
       .then((res) => {
-        console.log(res.data.data[0], "ini res table");
         setTableDetail(res.data.data[0]);
       })
       .catch((error) => {
@@ -32,15 +28,12 @@ const Sukses = () => {
     axios
       .get(API_URL2 + `keranjangs?id_tables=${id}`)
       .then((res) => {
-        console.log(res.data.data, "ini res keranjang");
         setMenus(res.data.data);
       })
       .catch((error) => {
         console.log("Error yaa ", error);
       });
-  }, [id]);
 
-  useEffect(() => {
     const calculateTotalBayar = () => {
       if (menu) {
         const total = menu.reduce(
@@ -52,9 +45,21 @@ const Sukses = () => {
     };
 
     calculateTotalBayar();
-  }, [menu]);
+  }, [id, menu]);
 
-  console.log(menu, "ini data menu");
+  // useEffect(() => {
+  //   const calculateTotalBayar = () => {
+  //     if (menu) {
+  //       const total = menu.reduce(
+  //         (result, item) => result + item.total_harga,
+  //         0
+  //       );
+  //       setTotalBayar(total);
+  //     }
+  //   };
+
+  //   calculateTotalBayar();
+  // }, [menu]);
 
   const handlePayButton = async (e) => {
     let data = {
@@ -63,15 +68,22 @@ const Sukses = () => {
       name: tableDetail.name,
       no_telp: tableDetail.no_telp,
     };
+    let dataPush = {
+      total_bayar: totalBayar,
+      name: tableDetail.name,
+      no_telp: tableDetail.no_telp,
+      time_start: tableDetail.time_start,
+      status: status,
+    };
     try {
-      const token = await axios.post(API_URL2 + "/table/checkout", data);
-      console.log(token, "lhooo");
+      const token = await axios.post(API_URL2 + "table/checkout", data);
       const tokenApp = token.data;
       window.snap.pay(tokenApp, {
         onSuccess: function (result) {
           /* You may add your own implementation here */
           alert("payment success!");
           console.log(result);
+          setStatus(true);
           navigate(`/feedback/${id}`);
         },
         onPending: function (result) {
@@ -89,6 +101,7 @@ const Sukses = () => {
           alert("you closed the popup without finishing the payment");
         },
       });
+      await axios.post(API_URL2 + "receipt", dataPush);
     } catch (err) {
       console.log("hmmmmmmmmm", err);
     }
@@ -160,6 +173,8 @@ const Sukses = () => {
                 <Card.Title className="mt-2 ml-3">
                   Total Harga: Rp. {numberWithCommas(totalBayar)}
                 </Card.Title>
+                *Jika memilih bayar dikasir, tunjukkan halaman untuk melakukan
+                pembayaran
               </ListGroup>
             </ListGroup>
           </Card.Body>
@@ -176,11 +191,12 @@ const Sukses = () => {
             </Button>{" "}
             <Button
               variant="primary"
+              className="mr-5"
               onClick={() => {
                 handlePayButton();
               }}
             >
-              Bayar
+              Bayar Langsung
             </Button>{" "}
           </Card.Body>
         </Card>

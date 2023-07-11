@@ -8,6 +8,10 @@
     justify-content: center;
     margin-bottom: 10px;
   }
+
+  .tulisan{
+    color: #f5b70a;
+  }
   
   .single__feature span i {
     font-size: 1.5rem;

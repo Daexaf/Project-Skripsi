@@ -47,143 +47,12 @@ const Order = () => {
       .get(API_URL2 + "product?category.name=" + value)
       .then((res) => {
         const menus = res.data.data;
-        // console.log(menus);
         setMenus(menus);
       })
       .catch((error) => {
         console.log("Error ya ", error);
       });
   };
-
-  // const isiData = (value) => {
-  //   axios.get(API_URL2 + "product/" + value.id_products).then((resProducts) => {
-  //     console.log(resProducts.data.data[0].name, "resProducts");
-  //     console.log(resProducts.data.data[0].harga, "ini harga");
-  //     const name = resProducts.data.data[0].name;
-  //     const harga = resProducts.data.data[0].harga;
-  //   });
-  // };
-
-  // const masukKeranjang = (value) => {
-  //   axios
-  //     .get(API_URL2 + "keranjangs?id_tables=" + id_tables)
-  //     .then((resKeranjang) => {
-  //       const finder = resKeranjang.data.data.find((e) => {
-  //         return e.product === value.id_products;
-  //       });
-  //       axios
-  //         .get(API_URL2 + "product/" + value.id_products)
-  //         .then((resProducts) => {
-  //           console.log(resProducts.data.data[0].name, "resProducts");
-  //           console.log(resProducts.data.data[0].harga, "ini harga");
-  //           const name = resProducts.data.data[0].name;
-  //           // const harga = resProducts.data.data[0].harga;
-  //           if (!finder) {
-  //             console.log("ini jalan");
-  //             const keranjang = {
-  //               jumlah: 1,
-  //               total_harga: Number(value.harga),
-  //               product: value.id_products,
-  //               id_tables,
-  //             };
-  //             axios
-  //               .post(API_URL2 + "keranjangs", keranjang)
-  //               .then((res) => {
-  //                 // console.log(res.data.data, "res.data.data");
-  //                 const newArr = [...keranjangs, res.data.data];
-  //                 console.log(newArr, "newArr");
-  //                 setKeranjangs(newArr);
-  //                 swal({
-  //                   title: "Berhasil Masuk Keranjang",
-  //                   text: "Berhasil tambah menu " + name,
-  //                   icon: "success",
-  //                   button: "tutup",
-  //                   timer: 1500,
-  //                 });
-  //               })
-  //               .catch((error) => {
-  //                 console.log("Error ya ", error);
-  //               });
-  //           } else {
-  //             console.log("ini ga jalan");
-  //             const keranjang = {
-  //               jumlah: finder.jumlah + 1,
-  //               total_harga:
-  //                 finder.total_harga + Number(resProducts.data.data[0].harga),
-  //               product: value.id_products,
-  //               id_keranjangs: finder.id_keranjangs,
-  //             };
-  //             console.log(keranjang, "ini keranjang line 98");
-  //             axios
-  //               .put(API_URL2 + "keranjangs/" + finder.id_keranjangs, keranjang)
-  //               .then((res) => {
-  //                 const oldData = keranjangs.filter((e) => {
-  //                   return e.id !== res.data.data.id;
-  //                 });
-  //                 const finalData = [...oldData, res.data.data];
-  //                 console.log(finalData, "newArr");
-  //                 setKeranjangs(finalData);
-  //                 swal({
-  //                   title: "Berhasil Masuk Keranjang",
-  //                   text:
-  //                     "Berhasil tambah menu " + resProducts.data.data[0].name,
-  //                   icon: "success",
-  //                   button: "tutup",
-  //                   timer: 1500,
-  //                 });
-  //               })
-  //               .catch((error) => {
-  //                 console.log("Error ya ", error);
-  //               });
-  //           }
-  //         });
-  //     })
-
-  //     .catch((error) => {
-  //       // axios
-  //       //   .get(API_URL2 + "product/" + value.id_products)
-  //       //   .then((resProducts) => {
-  //       //     console.log(resProducts.data.data[0].name, "resProducts");
-  //       //     console.log(resProducts.data.data[0].harga, "ini harga");
-  //       //     const name = resProducts.data.data[0].name;
-  //       //     const harga = resProducts.data.data[0].harga;
-
-  //       if (error.response && error.response.data.statusCode === 404) {
-  //         const keranjang = {
-  //           jumlah: 1,
-  //           total_harga: Number(value.harga),
-  //           product: value.id_products,
-  //           id_tables,
-  //         };
-  //         axios
-  //           .get(API_URL2 + "product/" + value.id_products)
-  //           .then((resProducts) => {
-  //             const name = resProducts.data.data[0].name;
-  //             const harga = resProducts.data.data[0].harga;
-  //             axios
-  //               .post(API_URL2 + "keranjangs", keranjang)
-  //               .then((res) => {
-  //                 const newArr = [...keranjangs, res.data.data];
-  //                 setKeranjangs(newArr);
-  //                 swal({
-  //                   title: "Berhasil Masuk Keranjang",
-  //                   text: "Berhasil tambah menu " + name,
-  //                   icon: "success",
-  //                   button: "tutup",
-  //                   timer: 1500,
-  //                 });
-  //               })
-  //               .catch((error) => {
-  //                 console.log("Error ya ", error);
-  //               });
-  //           });
-  //         return;
-  //       } else {
-  //         console.log(error);
-  //       }
-  //     });
-  //   // });
-  // };
 
   const masukKeranjang = async (value) => {
     const product = await axios.get(API_URL2 + "product/" + value.id_products);
@@ -223,13 +92,6 @@ const Order = () => {
         button: "tutup",
         timer: 1500,
       });
-      // const oldData = keranjangs.filter((e) => {
-      //   console.log(e, "ee");
-      //   return e.id !== kerangjang.data.data.id_keranjangs;
-      // });
-      // const finalData = [...oldData, kerangjang.data.data];
-      // console.log(oldData, "old");
-      // console.log(kerangjang, "data data data");
       const blablabla = await axios.get(
         API_URL2 + `keranjangs?id_tables=${id_tables}`
       );

@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React, { useEffect } from "react";
 import Home from "./pages/Home";
-import "../src/App.css";
+import "./App.css";
 import { Login } from "./pages/LoginAdmin";
 import { Register } from "./pages/RegisterAdmin";
 import { LoginUser } from "./pages/LoginUser";
@@ -24,12 +24,11 @@ import AddAdmin from "./components/dashboard-admin/admin/AddAdmin";
 import PrivateComponent from "./components/auth/PrivateComponents";
 import FeedbackForm from "./pages/FeedBack";
 import PaymentForm from "./pages/Payment";
+import Dashboard from "./components/dashboard-admin/Dashboard";
 
 const App = () => {
   useEffect(() => {
-    axios.get(API_URL2 + "product").then((res) => {
-      // console.log(res);
-    });
+    axios.get(API_URL2 + "product").then((res) => {});
   }, []);
 
   return (
@@ -39,7 +38,7 @@ const App = () => {
 
         <Route element={<PrivateComponent />}>
           <Route path="/admin/" element={<DashboardAdmin />}>
-            <Route path="dashboard" element={<Category />} />
+            <Route path="dashboard" element={<Dashboard />} />
 
             {/* ini untuk admin kategori */}
             <Route path="category" element={<Category />} />

@@ -3,6 +3,9 @@ import axios from "axios";
 import { API_URL2 } from "../utils/constants";
 import { ListGroup, Button, Card } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as solidStarIcon } from "@fortawesome/free-solid-svg-icons";
+import { faStar as regularStarIcon } from "@fortawesome/free-regular-svg-icons";
 
 const FeedbackForm = () => {
   const [rating, setRating] = useState(0);
@@ -10,16 +13,29 @@ const FeedbackForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [datac, setDatac] = useState(null);
+  const [menu, setMenus] = useState();
+  const [bintang, setBintang] = useState(0);
 
   useEffect(() => {
     axios.get(API_URL2 + `table/${id}`).then((res) => {
       console.log(res.data.data[0], "ini ga ada idnya");
       setDatac(res.data.data[0]);
     });
+    axios
+      .get(API_URL2 + `keranjangs?id_tables=${id}`)
+      .then((res) => {
+        console.log(res.data.data, "ini res keranjang");
+        setMenus(res.data.data);
+      })
+      .catch((error) => {
+        console.log("Error yaa ", error);
+      });
   }, [id]);
 
   const handleRatingChange = (event) => {
-    setRating(Number(event.target.value));
+    const value = Number(event.target.value);
+    setRating(value);
+    setBintang(value);
   };
 
   const handleCommentChange = (event) => {
@@ -28,7 +44,6 @@ const FeedbackForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const today = new Date();
     const converse2 = today.toLocaleString();
     let data = {
@@ -49,15 +64,16 @@ const FeedbackForm = () => {
     });
     try {
       const feedbackData = {
-        rating,
+        rating_pelayanan: rating,
+        rating_makanan: bintang,
         comment,
       };
 
       const response = await axios.post(`${API_URL2}/feedback`, feedbackData);
-      console.log(response.data); // Tampilkan respon dari server jika diperlukan
+      console.log(response.data);
 
-      // Reset nilai dan komentar setelah pengiriman berhasil
       setRating(0);
+      setBintang(0);
       setComment("");
     } catch (error) {
       console.log("Error:", error);
@@ -76,15 +92,11 @@ const FeedbackForm = () => {
             <Card.Header className="text-center">
               Restoran Sop Duren 97
             </Card.Header>
-            <Card.Title className="mt-2">Nama Pemesan:</Card.Title>
-            <Card.Title className="mt-2">pesanan meja #</Card.Title>
-            <Card.Subtitle className=" text-muted">jam</Card.Subtitle>
             <Card.Text className="text-center text-black">
               Customer Feedback
             </Card.Text>
             <ListGroup className="list-group-flush">
               <ListGroup as="ol" numbered>
-                <h3>Feedback</h3>
                 <div className="form-group">
                   <label>Rating pelayanan:</label>
                   <select
@@ -109,6 +121,37 @@ const FeedbackForm = () => {
                     rows={5}
                   />
                 </div>
+
+                {/* <ListGroup>
+                  {/* <label>Rating makanan:</label> 
+                  {menu &&
+                    menu.map((item) => (
+                      <ListGroup.Item
+                        key={item.id_keranjangs}
+                        className="d-flex justify-content-between align-items-start"
+                      >
+                        <div className="ms-2 me-auto text-center">
+                          <div className="fw-bold">{item.product[0].name}</div>
+                          {/* <div className="form-group">
+                            <div className="rating-stars">
+                              {Array.from({ length: 5 }).map((_, index) => (
+                                <FontAwesomeIcon
+                                  key={index}
+                                  icon={
+                                    index + 1 <= bintang
+                                      ? solidStarIcon
+                                      : regularStarIcon
+                                  }
+                                  onClick={() => setBintang(index + 1)}
+                                />
+                              ))}
+                            </div>
+                          </div> 
+                        </div>
+                      </ListGroup.Item>
+                    ))}
+                </ListGroup> */}
+
                 <button type="submit" className="btn btn-primary">
                   Submit
                 </button>

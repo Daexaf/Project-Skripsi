@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import { ListGroup, Col, Row, Card } from "react-bootstrap";
 import numberWithCommas from "../../utils/utils";
 import TotalBayar from "./TotalBayar";
-// import { Col } from "reactstrap";
 import "./order.css";
 import ModalKeranjang from "./ModalKeranjang";
 
 export default class Hasil extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       showModal: false,
       keranjangDetail: false,
@@ -22,6 +20,7 @@ export default class Hasil extends Component {
     this.setState({
       showModal: true,
       keranjangDetail: menuKeranjang,
+      jumlah: menuKeranjang.jumlah,
     });
   };
 
@@ -37,7 +36,6 @@ export default class Hasil extends Component {
     this.setState({
       jumlah: jumlah + 1,
     });
-
     const totalHarga = keranjangDetail.product[0].harga * (jumlah + 1);
     this.setState({
       keranjangDetail: {
@@ -46,6 +44,7 @@ export default class Hasil extends Component {
         total_harga: totalHarga,
       },
     });
+    // this.setState({});
   };
 
   kurang = () => {
@@ -65,18 +64,22 @@ export default class Hasil extends Component {
         },
       });
     }
+    // this.setState({});
+  };
+
+  handleRerender = () => {
+    this.setState({});
   };
 
   render() {
     const { keranjangs, setKeranjangs } = this.props;
-    console.log(keranjangs, "ini keranjangs");
     return (
       <Col md={6} lg={4} xl={3} mt="2">
         <h4>
           <strong>Hasil</strong>
         </h4>
         <hr />
-        <Card className="overflow-auto hasil">
+        <Card className="overflow-auto hasil" style={{ cursor: "pointer" }}>
           <ListGroup variant="flush">
             {keranjangs.map((menuKeranjang, index) => (
               <ListGroup.Item
