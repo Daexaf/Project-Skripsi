@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Header from "../components/header/Header";
 import HeroSlider from "../components/hero-slider/HeroSlider";
 import PopularMenu from "../components/popular-menu/PopularMenu";
@@ -17,7 +17,6 @@ const Home = () => {
       <HeroSlider />
       <PopularMenu />
       <ChooseUs />
-      {/* <MenuPack /> */}
       <Testimonial />
       <Footer />
     </Fragment>

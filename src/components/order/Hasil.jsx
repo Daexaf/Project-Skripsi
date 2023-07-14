@@ -114,6 +114,16 @@ export default class Hasil extends Component {
               setKeranjangs={setKeranjangs}
             />
           </ListGroup>
+          <h4 className="block md:hidden pb-[100px]">
+            Total Harga: Rp.{" "}
+            <strong className="float-right mr-2">
+              {numberWithCommas(
+                keranjangs.reduce(function (result, item) {
+                  return result + item.total_harga;
+                }, 0)
+              )}
+            </strong>
+          </h4>
         </Card>
         <TotalBayar keranjangs={keranjangs} {...this.props} />
       </Col>

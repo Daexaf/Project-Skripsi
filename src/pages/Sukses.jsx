@@ -14,6 +14,7 @@ const Sukses = () => {
   const [menu, setMenus] = useState();
   const [totalBayar, setTotalBayar] = useState(0);
   const [status, setStatus] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     axios
@@ -47,20 +48,6 @@ const Sukses = () => {
     calculateTotalBayar();
   }, [id, menu]);
 
-  // useEffect(() => {
-  //   const calculateTotalBayar = () => {
-  //     if (menu) {
-  //       const total = menu.reduce(
-  //         (result, item) => result + item.total_harga,
-  //         0
-  //       );
-  //       setTotalBayar(total);
-  //     }
-  //   };
-
-  //   calculateTotalBayar();
-  // }, [menu]);
-
   const handlePayButton = async (e) => {
     let data = {
       id_tables: id,
@@ -73,7 +60,7 @@ const Sukses = () => {
       name: tableDetail.name,
       no_telp: tableDetail.no_telp,
       time_start: tableDetail.time_start,
-      status: status,
+      status: false,
     };
     try {
       const token = await axios.post(API_URL2 + "table/checkout", data);
@@ -81,10 +68,11 @@ const Sukses = () => {
       window.snap.pay(tokenApp, {
         onSuccess: function (result) {
           /* You may add your own implementation here */
-          alert("payment success!");
+          alert("Pembayaran Berhasil, Terima kasih");
           console.log(result);
-          setStatus(true);
-          navigate(`/feedback/${id}`);
+          dataPush.status = true;
+          navigate(`/home/${id}`);
+          axios.post(API_URL2 + "receipt", dataPush);
         },
         onPending: function (result) {
           /* You may add your own implementation here */
@@ -101,14 +89,27 @@ const Sukses = () => {
           alert("you closed the popup without finishing the payment");
         },
       });
-      await axios.post(API_URL2 + "receipt", dataPush);
     } catch (err) {
       console.log("hmmmmmmmmm", err);
     }
   };
 
+  const handleDisini = async (e) => {
+    setModalOpen(true);
+
+    let dataPush = {
+      total_bayar: totalBayar,
+      name: tableDetail.name,
+      no_telp: tableDetail.no_telp,
+      time_start: tableDetail.time_start,
+      status: false,
+    };
+
+    await axios.post(API_URL2 + "receipt", dataPush);
+  };
+
   return (
-    <>
+    <div className="relative w-full h-full">
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* <!-- @TODO: replace SET_YOUR_CLIENT_KEY_HERE with your client key --> */}
@@ -173,8 +174,19 @@ const Sukses = () => {
                 <Card.Title className="mt-2 ml-3">
                   Total Harga: Rp. {numberWithCommas(totalBayar)}
                 </Card.Title>
-                *Jika memilih bayar dikasir, tunjukkan halaman untuk melakukan
-                pembayaran
+                <span className="flex gap-[3px]">
+                  *Jika memilih bayar dikasir, Klik{" "}
+                  <span
+                    className="cursor-pointer text-blue underline"
+                    onClick={() => {
+                      handleDisini();
+                    }}
+                  >
+                    {" "}
+                    di sini{" "}
+                  </span>{" "}
+                  untuk membayar
+                </span>
               </ListGroup>
             </ListGroup>
           </Card.Body>
@@ -201,7 +213,64 @@ const Sukses = () => {
           </Card.Body>
         </Card>
       </div>
-    </>
+
+      {modalOpen && (
+        <div
+          id="popup-modal"
+          tabindex="-1"
+          className="absolute z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+          style={{
+            top: "50%",
+            left: "54%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <div className="relative w-full max-w-md max-h-full">
+            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+              <button
+                type="button"
+                className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-hide="popup-modal"
+              >
+                <span className="sr-only">Close modal</span>
+              </button>
+              <div className="p-6 text-center">
+                <div className="w-full flex justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="w-[80px] h-[80px]"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="mb-3 mt-3 text-lg font-normal text-gray-500 dark:text-gray-400">
+                  Data telah diterima, silahkan bayar ke kasir dan sebutkan nama
+                  serta nomor telepon
+                </h3>
+                <button
+                  data-modal-hide="popup-modal"
+                  type="button"
+                  className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                  onClick={() => {
+                    navigate(`/home/${id}`);
+                  }}
+                >
+                  Selesai
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

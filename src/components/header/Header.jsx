@@ -20,6 +20,10 @@ const navLinks = [
     display: "Popular",
     url: "#popular",
   },
+  {
+    display: "Review",
+    url: "#review",
+  },
 ];
 
 const Header = () => {
@@ -30,6 +34,7 @@ const Header = () => {
   const { id_tables } = useParams();
   const dispatch = useDispatch();
   const [, setdatac] = useState(null);
+  const [popup, setPopup] = useState(false);
 
   useEffect(() => {
     axios.get(API_URL2 + `table/${id_tables}`).then((res) => {
@@ -41,25 +46,6 @@ const Header = () => {
   const handleOrder = () => {
     dispatch(endData(Date.now()));
 
-    // const today = new Date();
-    // const converse2 = today.toLocaleString();
-    // let data = {
-    //   id_tables: datac.id_tables,
-    //   name: datac.name,
-    //   no_telp: datac.no_telp,
-    //   table_name: datac.table_name,
-    //   time_start: datac.time_start,
-    //   // time_end: converse2,
-    // };
-
-    // console.log(datac, "data");
-
-    // // dispatch(timeData(Date.now()));
-    // axios.put(API_URL2 + `table/${id_tables}`, data).then((res) => {
-    //   // navigate(`/Home/${id}`);
-    //   console.log(res);
-    // });
-
     navigate(`/Order/${id_tables}`);
   };
   console.log(timeTaken);
@@ -68,7 +54,12 @@ const Header = () => {
     <header className="header">
       <Container>
         <div className="navigation">
-          <div className="logo">
+          <div
+            className="logo"
+            onClick={() => {
+              navigate(`/home/${id_tables}`);
+            }}
+          >
             <h2 className="d-flex align-items-center gap-1">
               <span>
                 <i className="ri-restaurant-2-line"></i>

@@ -1,13 +1,23 @@
 import React from "react";
 import { Navbar, Container } from "react-bootstrap";
 import "./order.css";
+import { useNavigate, useParams } from "react-router-dom";
 
 const NavbarComponent = () => {
+  const navigate = useNavigate();
+  const { id_tables } = useParams();
+
   return (
     <Navbar expand="lg" className="navbar">
       <Container>
         <Navbar.Brand>
-          <div className="logo">
+          <div
+            className="logo cursor-pointer"
+            onClick={() => {
+              console.log("trigre");
+              navigate(`/home/${id_tables}`);
+            }}
+          >
             <h2 className="d-flex align-items-center gap-1">
               <span>
                 <i className="ri-restaurant-2-line"></i>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL2 } from "../utils/constants";
 import axios from "axios";
+import "./sukses.css";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -34,7 +35,7 @@ export const Login = () => {
         return e.password === loginData.password;
       });
       if (username.length && password.length) {
-        navigate("/admin");
+        navigate("/admin/dashboard");
         localStorage.setItem("id_admins", username[0].id_admins);
       } else if (username.length && !password.length) {
         alert("lupa password kali");
@@ -45,17 +46,17 @@ export const Login = () => {
     });
   };
   return (
-    <div className="App">
+    <div className="App tulisan">
       <div className="auth-form-container">
-        <form onSubmit={handleLogin} className="login-form text-black">
-          <h2 className="text-center p-5">
+        <form onSubmit={handleLogin} className="login-form">
+          <h2 className="text-center p-5 tulisan">
             Selamat datang di Login Admin E-DUREN
           </h2>
           <label htmlFor="username" className="text-white">
             Username:
           </label>
           <input
-            className="p-2 mb-2"
+            className="p-2 mb-2 text-black"
             // value={email}
             type="text"
             placeholder="Masukkan Email Anda"
@@ -70,7 +71,7 @@ export const Login = () => {
             Password:
           </label>
           <input
-            className="p-2 mb-2"
+            className="p-2 mb-2 text-black"
             // value={pass}
             type="password"
             placeholder="****"

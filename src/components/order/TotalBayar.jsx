@@ -9,15 +9,7 @@ import { Link } from "react-router-dom";
 import "./order.css";
 
 export default class TotalBayar extends Component {
-  submitTotalBayar = (totalBayar) => {
-    // const pesanan = {
-    //   total_bayar: totalBayar,
-    //   menus: this.props.keranjangs,
-    // };
-    // axios.post(API_URL2 + "pesanans", pesanan).then((res) => {
-    //   this.props.history.push("/sukses");
-    // });
-  };
+  submitTotalBayar = (totalBayar) => {};
   render() {
     const totalBayar = this.props.keranjangs.reduce(function (result, item) {
       return result + item.total_harga;
@@ -26,7 +18,7 @@ export default class TotalBayar extends Component {
       <div className="fixed-bottom">
         <Row>
           <Col md={{ span: 3, offset: 9 }} xs={12} className="px-4 bayar">
-            <h4>
+            <h4 className="hidden md:block">
               Total Harga: Rp.{" "}
               <strong className="float-right mr-2">
                 {numberWithCommas(totalBayar)}

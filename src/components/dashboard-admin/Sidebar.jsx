@@ -1,7 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    const confirmLogout = window.confirm("Apakah Anda yakin ingin logout?");
+
+    if (confirmLogout) {
+      // Lakukan proses logout di sini
+      // Contoh: Menghapus data admin dari localStorage
+      localStorage.removeItem("id_admins");
+      navigate("/login");
+    }
+  };
   return (
     <div
       className="bg-[#4E73DF] h-screen fixed z px-[25px] "
@@ -60,6 +72,13 @@ const Sidebar = () => {
           </span>
         </div>
       </Link>
+
+      <div className="icons cursor-pointer" onClick={handleLogout}>
+        <span className="flex items-center gap-[15] py-[10px] border-b-[1px] border-[#ededed]/[0.3] ml-2">
+          <i className="ri-table-line mb-3"></i>
+          <p className="ml-2 text-[14px] leading-[20px] font-bold">Logout</p>
+        </span>
+      </div>
       {/* <div className="">
         <p>Kategori</p>
         <div className="">
