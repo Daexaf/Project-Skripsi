@@ -9,12 +9,24 @@ import "./sukses.css";
 export const LoginUser = () => {
   const [name, setName] = useState("");
   const [noTelp, setNoTelp] = useState("");
+  const [errorMsg, setErrorMsg] = useState({ name: "", noTelp: "" });
   const navigate = useNavigate();
   let { id } = useParams();
   const dispatch = useDispatch();
 
   const handleSubmitLogin = (e) => {
     e.preventDefault();
+    if (!name) {
+      setErrorMsg({ ...errorMsg, name: "silahkan masukkan nama anda" });
+      return;
+    }
+    if (!noTelp) {
+      setErrorMsg({
+        ...errorMsg,
+        noTelp: "silahkan masukkan nomor telepon anda",
+      });
+      return;
+    }
     const today = new Date();
     const converse2 = today.toLocaleString();
 
@@ -57,12 +69,14 @@ export const LoginUser = () => {
             onChange={(e) => setName(e.target.value)}
             required
           />
+          {errorMsg.name && <p>{errorMsg.name}</p>}
           <label htmlFor="phone" className="text-white">
             Nomor Telepon:
           </label>
           <input
             className="p-2  text-black"
             type="number"
+            min="0"
             placeholder="Masukkan Nomor Telepon anda"
             id="phone"
             name="phone"
@@ -70,6 +84,7 @@ export const LoginUser = () => {
             onChange={(e) => setNoTelp(e.target.value)}
             required
           />
+          {errorMsg.noTelp && <p>{errorMsg.noTelp}</p>}
           <button
             type="submit"
             className="btn btn-success submit mb-2"

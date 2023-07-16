@@ -48,7 +48,7 @@ const Header = () => {
 
     navigate(`/Order/${id_tables}`);
   };
-  console.log(timeTaken);
+  // console.log(timeTaken);
 
   return (
     <header className="header">

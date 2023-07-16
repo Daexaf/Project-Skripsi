@@ -164,7 +164,7 @@ const FeedbackForm = () => {
               variant="primary"
               className="mr-5"
               onClick={() => {
-                navigate(`/sukses/${id}`);
+                navigate(`/home/${id}`);
               }}
             >
               Tutup

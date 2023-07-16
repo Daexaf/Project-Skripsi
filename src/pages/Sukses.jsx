@@ -49,6 +49,8 @@ const Sukses = () => {
   }, [id, menu]);
 
   const handlePayButton = async (e) => {
+    const today = new Date();
+    const converse2 = today.toLocaleString();
     let data = {
       id_tables: id,
       total_bayar: totalBayar,
@@ -62,6 +64,14 @@ const Sukses = () => {
       time_start: tableDetail.time_start,
       status: false,
     };
+    let dataPushtable = {
+      id_tables: tableDetail.id_tables,
+      name: tableDetail.name,
+      no_telp: tableDetail.no_telp,
+      table_name: tableDetail.table_name,
+      time_start: tableDetail.time_start,
+      time_end: converse2,
+    };
     try {
       const token = await axios.post(API_URL2 + "table/checkout", data);
       const tokenApp = token.data;
@@ -73,6 +83,7 @@ const Sukses = () => {
           dataPush.status = true;
           navigate(`/home/${id}`);
           axios.post(API_URL2 + "receipt", dataPush);
+          axios.put(API_URL2 + `table/${id}`, dataPushtable);
         },
         onPending: function (result) {
           /* You may add your own implementation here */

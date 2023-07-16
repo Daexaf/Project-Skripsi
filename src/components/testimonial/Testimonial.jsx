@@ -3,8 +3,11 @@ import { Container, Row, Col } from "reactstrap";
 import "./testimonial.css";
 import testimonialImg from "../../assets/images/geprek.jpg";
 import Slider from "react-slick";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Testimonials = () => {
+  const navigate = useNavigate();
+  let { id_tables } = useParams();
   const settings = {
     infinite: true,
     dots: true,
@@ -77,6 +80,13 @@ const Testimonials = () => {
               </div>
             </div>
           </Col>
+          <button
+            onClick={() => {
+              navigate(`/feedback/${id_tables}`);
+            }}
+          >
+            Berikan Masukkan anda!
+          </button>
         </Row>
       </Container>
     </section>

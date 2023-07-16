@@ -27,6 +27,7 @@ import PaymentForm from "./pages/Payment";
 import Dashboard from "./components/dashboard-admin/Dashboard";
 
 const App = () => {
+  // const navigate = useNavigate();
   useEffect(() => {
     axios.get(API_URL2 + "product").then((res) => {});
   }, []);
