@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ListGroup, Badge, Button, Card } from "react-bootstrap";
 import axios from "axios";
 import "./sukses.css";
-import { API_URL2, API_URL4 } from "../utils/constants";
+import { API_URL2 } from "../utils/constants";
 import numberWithCommas from "../utils/utils";
 import { Helmet } from "react-helmet";
 
@@ -13,7 +13,7 @@ const Sukses = () => {
   const [tableDetail, setTableDetail] = useState();
   const [menu, setMenus] = useState();
   const [totalBayar, setTotalBayar] = useState(0);
-  const [status, setStatus] = useState(false);
+  const [kode, setKode] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
@@ -30,11 +30,16 @@ const Sukses = () => {
       .get(API_URL2 + `keranjangs?id_tables=${id}`)
       .then((res) => {
         setMenus(res.data.data);
+
+        // Clear previous data when menus are updated
+        setKode([]);
       })
       .catch((error) => {
         console.log("Error yaa ", error);
       });
+  }, [id]);
 
+  useEffect(() => {
     const calculateTotalBayar = () => {
       if (menu) {
         const total = menu.reduce(
@@ -46,11 +51,26 @@ const Sukses = () => {
     };
 
     calculateTotalBayar();
-  }, [id, menu]);
+
+    menu?.forEach((element) => {
+      console.log(element, "ini harusnya cuma 2, karena datanya cuma 2");
+      setKode((prev) => {
+        return [
+          ...prev,
+          {
+            kode: element.product[0].kode,
+            jumlah: element.jumlah,
+            keterangan: element.keterangan,
+          },
+        ];
+      });
+    });
+  }, [menu]);
 
   const handlePayButton = async (e) => {
     const today = new Date();
     const converse2 = today.toLocaleString();
+
     let data = {
       id_tables: id,
       total_bayar: totalBayar,
@@ -62,6 +82,7 @@ const Sukses = () => {
       name: tableDetail.name,
       no_telp: tableDetail.no_telp,
       time_start: tableDetail.time_start,
+      kode,
       status: false,
     };
     let dataPushtable = {
@@ -81,9 +102,10 @@ const Sukses = () => {
           alert("Pembayaran Berhasil, Terima kasih");
           console.log(result);
           dataPush.status = true;
-          navigate(`/home/${id}`);
           axios.post(API_URL2 + "receipt", dataPush);
           axios.put(API_URL2 + `table/${id}`, dataPushtable);
+          axios.delete(API_URL2 + `keranjangs?id_tables=${id}`);
+          navigate(`/home/${id}`);
         },
         onPending: function (result) {
           /* You may add your own implementation here */
@@ -101,12 +123,28 @@ const Sukses = () => {
         },
       });
     } catch (err) {
-      console.log("hmmmmmmmmm", err);
+      console.log("error", err);
     }
   };
 
   const handleDisini = async (e) => {
     setModalOpen(true);
+    const today = new Date();
+    const converse2 = today.toLocaleString();
+
+    menu?.forEach((element) => {
+      console.log(element, "ini harusnya cuma 2, karena datanya cuma 2");
+      setKode((prev) => {
+        return [
+          ...prev,
+          {
+            kode: element.product[0].kode,
+            jumlah: element.jumlah,
+            keterangan: element.keterangan,
+          },
+        ];
+      });
+    });
 
     let dataPush = {
       total_bayar: totalBayar,
@@ -114,9 +152,24 @@ const Sukses = () => {
       no_telp: tableDetail.no_telp,
       time_start: tableDetail.time_start,
       status: false,
+      kode: kode,
+    };
+
+    let dataPushtable = {
+      id_tables: tableDetail.id_tables,
+      name: tableDetail.name,
+      no_telp: tableDetail.no_telp,
+      table_name: tableDetail.table_name,
+
+      time_start: tableDetail.time_start,
+      time_end: converse2,
     };
 
     await axios.post(API_URL2 + "receipt", dataPush);
+
+    await axios.put(API_URL2 + `table/${id}`, dataPushtable);
+
+    await axios.delete(API_URL2 + `keranjangs?id_tables=${id}`);
   };
 
   return (
@@ -228,7 +281,7 @@ const Sukses = () => {
       {modalOpen && (
         <div
           id="popup-modal"
-          tabindex="-1"
+          tabIndex="-1"
           className="absolute z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
           style={{
             top: "50%",

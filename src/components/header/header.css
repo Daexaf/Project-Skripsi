@@ -9,6 +9,25 @@
   background: #141124;
 }
 
+.btn-group {
+  display: flex;
+  align-items: center;
+}
+
+.btn-group > button {
+  margin-right: 30px;
+}
+
+/* Style untuk tombol Order */
+.btn-order {
+  margin-right: 10px;
+}
+
+/* Style untuk tombol Logout */
+.btn-logout {
+  margin-left: 10px;
+}
+
 .navigation {
   display: flex;
   align-items: center;

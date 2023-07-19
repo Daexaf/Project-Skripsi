@@ -19,6 +19,7 @@ const PopHover = ({ element }) => {
         no_telp: element.no_telp,
         total_bayar: element.total_bayar,
         time_start: element.time_start,
+        kode: element.kode,
         status: element.status.toLowerCase() === "true" ? false : true,
       });
 

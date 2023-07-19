@@ -82,7 +82,7 @@ const Sidebar = () => {
       {/* <div className="">
         <p>Kategori</p>
         <div className="">
-          <i class="ri-settings-5-line"></i>
+          <i className="ri-settings-5-line"></i>
           <p>Components</p>
         </div>
       </div> */}

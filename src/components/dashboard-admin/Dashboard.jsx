@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { API_URL2 } from "../../utils/constants";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import PopHover from "./category/PopHover";
 
 const Dashboard = () => {
@@ -76,6 +76,9 @@ const Dashboard = () => {
                   <th scope="col" className="py-3 px-6">
                     Total Bayar
                   </th>
+                  <th scope="col" className="py-3 px-6 text-center">
+                    Pesanan
+                  </th>
                   <th scope="col" className="py-3 px-6">
                     Waktu
                   </th>
@@ -88,9 +91,10 @@ const Dashboard = () => {
               <tbody>
                 {filteredData.map((element, index) => (
                   <>
+                    {console.log(element, "ini element")}
                     <tr
                       className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                      key={element.id_receipts}
+                      key={index}
                     >
                       <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
                         {element.name}
@@ -100,6 +104,22 @@ const Dashboard = () => {
                       </td>
                       <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
                         {element.total_bayar}
+                      </td>
+                      <td className="py-4 px-6 font-medium whitespace-nowrap dark:text-black tulisan">
+                        {JSON.parse(element.kode)?.map((e) => (
+                          <div
+                            className="flex gap-[10px] text-black"
+                            key={e?.kode}
+                          >
+                            <p className="p-aja">{e?.kode}</p>
+                            <p className="p-aja">{e?.jumlah}</p>
+                            {/* Tampilkan keterangan hanya jika keterangannya tidak benar-benar undefined */}
+                            {e?.keterangan !== undefined &&
+                              e?.keterangan !== "undefined" && (
+                                <p className="p-aja">{e?.keterangan}</p>
+                              )}
+                          </div>
+                        ))}
                       </td>
                       <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
                         {element.time_start}

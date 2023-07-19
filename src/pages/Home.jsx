@@ -20,7 +20,7 @@ const Home = () => {
     // console.log(tableN, "table data");
     setTimeout(() => {
       navigate(`/table/${tableN}`);
-    }, 300000);
+    }, 1800000);
   }, [tableN]);
 
   useEffect(() => {

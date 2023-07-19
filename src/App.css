@@ -95,6 +95,10 @@ p {
   font-family: "Rubik", sans-serif;
 }
 
+.p-aja{
+  color:#0a071a;
+}
+
 a {
   text-decoration: none;
   color: unset;
