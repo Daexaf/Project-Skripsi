@@ -64,8 +64,17 @@ const Header = () => {
   const nameT = datac.table_name;
 
   const handleLogout = () => {
-    window.alert("Terima Kasih telah mengunjungi Sop Duren 87");
-    navigate(`/table/${nameT}`);
+    const time_logout = new Date();
+    axios
+      .put(API_URL2 + `table/logout/${id_tables}`, { time_logout })
+      .then((res) => {
+        window.alert("Terima Kasih telah mengunjungi Sop Duren 87");
+        navigate(`/table/${nameT}`);
+      })
+      .catch((error) => {
+        console.log(error);
+        // Penanganan kesalahan saat mengirim permintaan ke server
+      });
   };
 
   const handleOrder = () => {

@@ -14,13 +14,13 @@ export const Register = () => {
   return (
     <div className="App">
       <div className="auth-form-container">
-        <form onSubmit={handleSubmit} className="register-form text-black">
+        <form onSubmit={handleSubmit} className="register-form">
           <h1 className="text-center p-5">Silahkan Daftar</h1>
           <label htmlFor="Fullname" className="text-white">
             Nama :
           </label>
           <input
-            className="p-2 mb-2"
+            className="p-2 mb-2 text-black"
             // value={name}
             name="name"
             id="name"
@@ -30,7 +30,7 @@ export const Register = () => {
             Email
           </label>
           <input
-            className="p-2 mb-2"
+            className="p-2 mb-2 text-black"
             // value={email}
             type="email"
             placeholder="Masukkan Email Anda"
@@ -49,7 +49,7 @@ export const Register = () => {
             name="password"
           />
           <button type="submit" className="btn btn-success submit mb-2">
-            Login
+            Daftar
           </button>
         </form>
         <button className="link-btn" onClick={() => navigate("/Login")}>

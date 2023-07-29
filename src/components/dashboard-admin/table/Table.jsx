@@ -6,21 +6,35 @@ import ModalTable from "./ModalTable";
 
 const Table = () => {
   const [viewData, setViewData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+  const [filterValue, setFilterValue] = useState("");
 
   useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
     axios
       .get(API_URL2 + "table")
       .then((res) => {
-        const showData = res.data.data;
-        setViewData(showData);
-        console.log(showData);
+        const data = res.data.data;
+        setViewData(data);
+        setFilteredData(data); // Set data awal sebagai data yang difilter
       })
       .catch((error) => {
         console.log("Error ya ", error);
       });
-  }, []);
+  };
+
+  const handleFilter = () => {
+    // Lakukan pemfilteran berdasarkan nama pengguna
+    const filtered = viewData.filter((item) =>
+      item.name.toLowerCase().includes(filterValue.toLowerCase())
+    );
+    setFilteredData(filtered);
+  };
 
   const deleteData = (id_tables) => {
     console.log(id_tables);
@@ -33,18 +47,33 @@ const Table = () => {
     });
   };
 
+  console.log(viewData, "ini datanya");
+
   return (
     <>
       <div className="py-12 w-100">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div className="flex justify-end m-2 p-2">
-            <Link
+          <div className="flex justify-start m-2 p-2">
+            {/* <Link
               to={`/admin/table/add/`}
               className="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white"
               style={{ textDecoration: "none" }}
             >
               Tambah Table Baru
-            </Link>
+            </Link> */}
+            <input
+              type="text"
+              value={filterValue}
+              onChange={(e) => setFilterValue(e.target.value)}
+              placeholder="Filter berdasarkan nama pengguna"
+              className="px-4 py-2 border border-gray-300 rounded-lg mr-2"
+            />
+            <button
+              onClick={handleFilter}
+              className="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white"
+            >
+              Filter
+            </button>
           </div>
           <div className="overflow-x-auto relative h-screen">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -69,8 +98,8 @@ const Table = () => {
                 </tr>
               </thead>
               <tbody>
-                {viewData.map((element, index) => (
-                  <>
+                {filteredData.map((element, index) => (
+                  <React.Fragment key={element.id_tables}>
                     <tr
                       className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                       key={index}
@@ -120,7 +149,7 @@ const Table = () => {
                         id_tables={selectedId}
                       />
                     )}
-                  </>
+                  </React.Fragment>
                 ))}
               </tbody>
             </table>
