@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { API_URL2 } from "../../utils/constants";
 // import { Link } from "react-router-dom";
 import PopHover from "./category/PopHover";
+import { Fragment } from "react";
 
 const Dashboard = () => {
   const [viewData, setViewData] = useState([]);
@@ -89,47 +90,59 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {filteredData.map((element, index) => (
-                  <>
-                    {console.log(element, "ini element")}
-                    <tr
-                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                      key={index}
-                    >
-                      <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                        {element.name}
-                      </td>
-                      <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                        {element.no_telp}
-                      </td>
-                      <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                        {element.total_bayar}
-                      </td>
-                      <td className="py-4 px-6 font-medium whitespace-nowrap dark:text-black tulisan">
-                        {JSON.parse(element.kode)?.map((e) => (
-                          <div
-                            className="flex gap-[10px] text-black"
-                            key={e?.kode}
-                          >
-                            <p className="p-aja">{e?.kode}</p>
-                            <p className="p-aja">{e?.jumlah}</p>
-                            {/* Tampilkan keterangan hanya jika keterangannya tidak benar-benar undefined */}
-                            {e?.keterangan !== undefined &&
-                              e?.keterangan !== "undefined" && (
-                                <p className="p-aja">{e?.keterangan}</p>
-                              )}
-                          </div>
-                        ))}
-                      </td>
-                      <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                        {element.time_start}
-                      </td>
-                      <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                        <PopHover element={element} />
-                      </td>
-                    </tr>
-                  </>
-                ))}
+                {filteredData.map((element, index) => {
+                  const dateObject = new Date(element.time_start);
+                  const formattedDate = dateObject.toLocaleString("id-ID", {
+                    timeZone: "Asia/Jakarta",
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                  });
+                  return (
+                    <Fragment key={`${element.id_receipt} ${index}`}>
+                      {console.log(element, "ini element")}
+                      <tr
+                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                        key={element.id_receipt}
+                      >
+                        <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                          {element.name}
+                        </td>
+                        <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                          {element.no_telp}
+                        </td>
+                        <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                          {element.total_bayar}
+                        </td>
+                        <td className="py-4 px-6 font-medium whitespace-nowrap dark:text-black tulisan">
+                          {JSON.parse(element.kode)?.map((e) => (
+                            <div
+                              className="flex gap-[10px] text-black"
+                              key={e?.kode}
+                            >
+                              <p className="p-aja">{e?.kode}</p>
+                              <p className="p-aja">{e?.jumlah}</p>
+                              {/* Tampilkan keterangan hanya jika keterangannya tidak benar-benar undefined */}
+                              {e?.keterangan !== undefined &&
+                                e?.keterangan !== "undefined" && (
+                                  <p className="p-aja">{e?.keterangan}</p>
+                                )}
+                            </div>
+                          ))}
+                        </td>
+                        <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                          {formattedDate}
+                        </td>
+                        <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                          <PopHover element={element} />
+                        </td>
+                      </tr>
+                    </Fragment>
+                  );
+                })}
               </tbody>
             </table>
           </div>

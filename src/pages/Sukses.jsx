@@ -69,7 +69,9 @@ const Sukses = () => {
 
   const handlePayButton = async (e) => {
     const today = new Date();
-    const converse2 = today.toLocaleString();
+    const converse2 = today.toLocaleString("id-ID", {
+      timeZone: "Asia/Jakarta",
+    });
 
     let data = {
       id_tables: id,
@@ -90,7 +92,6 @@ const Sukses = () => {
       name: tableDetail.name,
       no_telp: tableDetail.no_telp,
       table_name: tableDetail.table_name,
-      time_start: tableDetail.time_start,
       time_end: converse2,
     };
     try {
@@ -130,7 +131,9 @@ const Sukses = () => {
   const handleDisini = async (e) => {
     setModalOpen(true);
     const today = new Date();
-    const converse2 = today.toLocaleString();
+    const converse2 = today.toLocaleString("id-ID", {
+      timeZone: "Asia/Jakarta",
+    });
 
     menu?.forEach((element) => {
       console.log(element, "ini harusnya cuma 2, karena datanya cuma 2");

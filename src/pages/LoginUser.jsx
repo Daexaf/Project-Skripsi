@@ -28,7 +28,9 @@ export const LoginUser = () => {
       return;
     }
     const today = new Date();
-    const converse2 = today.toLocaleString();
+    const converse2 = today.toLocaleString("id-ID", {
+      timeZone: "Asia/Jakarta",
+    });
 
     // setCurrentTime(converse2);
     console.log(converse2, "waktu");

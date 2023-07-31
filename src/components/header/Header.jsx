@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import "./header.css";
 import { Container } from "reactstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { endData } from "../../app/counterSlice";
 import axios from "axios";
 import { API_URL2 } from "../../utils/constants";
@@ -64,25 +64,15 @@ const Header = () => {
   const nameT = datac.table_name;
 
   const handleLogout = () => {
-    const time_logout = new Date();
-    axios
-      .put(API_URL2 + `table/logout/${id_tables}`, { time_logout })
-      .then((res) => {
-        window.alert("Terima Kasih telah mengunjungi Sop Duren 87");
-        navigate(`/table/${nameT}`);
-      })
-      .catch((error) => {
-        console.log(error);
-        // Penanganan kesalahan saat mengirim permintaan ke server
-      });
+    window.alert("Terima Kasih telah mengunjungi Sop Duren 87");
+    navigate(`/table/${nameT}`);
   };
-
   const handleOrder = () => {
     dispatch(endData(Date.now()));
 
     navigate(`/Order/${id_tables}`);
   };
-  // console.log(timeTaken);
+  console.log(typeof datac.time_start, "ini data c");
 
   return (
     <header className="header">

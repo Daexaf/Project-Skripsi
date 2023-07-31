@@ -92,65 +92,87 @@ const Table = () => {
                     Waktu Masuk
                   </th>
                   <th scope="col" className="py-3 px-6">
-                    Waktu Keluar
+                    Waktu Order
                   </th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                {filteredData.map((element, index) => (
-                  <React.Fragment key={element.id_tables}>
-                    <tr
-                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                      key={index}
-                    >
-                      <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                        {element.table_name}
-                      </td>
-                      <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                        {element.name}
-                      </td>
-                      <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                        {element.no_telp}
-                      </td>
-                      <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                        {element.time_start}
-                      </td>
-                      <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                        {element.time_end}
-                      </td>
-                      <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                        <div className="flex space-x-2">
-                          {/* <Link
+                {filteredData.map((element, index) => {
+                  const dateStartObject = new Date(element.time_start);
+                  const dateEndObject = new Date(element.time_end);
+                  const timeEnd = dateEndObject.toLocaleString("id-ID", {
+                    timeZone: "Asia/Jakarta",
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                  });
+                  const timeStart = dateStartObject.toLocaleString("id-ID", {
+                    timeZone: "Asia/Jakarta",
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                  });
+                  return (
+                    <React.Fragment key={element.id_tables}>
+                      <tr
+                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                        key={index}
+                      >
+                        <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                          {element.table_name}
+                        </td>
+                        <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                          {element.name}
+                        </td>
+                        <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                          {element.no_telp}
+                        </td>
+                        <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                          {timeStart}
+                        </td>
+                        <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                          {timeEnd}
+                        </td>
+                        <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
+                          <div className="flex space-x-2">
+                            {/* <Link
                             to={`/admin/category/edit/${element.id_categories}`}
                             className="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white"
                             style={{ textDecoration: "none" }}
                           >
                             Edit
                           </Link> */}
-                          <div className="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white">
-                            <button
-                              type="submit"
-                              onClick={(e) => {
-                                setOpenModal(true);
-                                setSelectedId(element.id_tables);
-                              }}
-                            >
-                              Delete
-                            </button>
+                            <div className="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white">
+                              <button
+                                type="submit"
+                                onClick={(e) => {
+                                  setOpenModal(true);
+                                  setSelectedId(element.id_tables);
+                                }}
+                              >
+                                Delete
+                              </button>
+                            </div>
                           </div>
-                        </div>
-                      </td>
-                    </tr>
-                    {openModal && (
-                      <ModalTable
-                        setOpenModal={setOpenModal}
-                        deleteData={deleteData}
-                        id_tables={selectedId}
-                      />
-                    )}
-                  </React.Fragment>
-                ))}
+                        </td>
+                      </tr>
+                      {openModal && (
+                        <ModalTable
+                          setOpenModal={setOpenModal}
+                          deleteData={deleteData}
+                          id_tables={selectedId}
+                        />
+                      )}
+                    </React.Fragment>
+                  );
+                })}
               </tbody>
             </table>
           </div>
