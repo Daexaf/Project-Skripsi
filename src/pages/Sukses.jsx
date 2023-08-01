@@ -16,6 +16,7 @@ const Sukses = () => {
   const [kode, setKode] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
 
+  console.log("tableDetail: ", tableDetail);
   useEffect(() => {
     axios
       .get(API_URL2 + `table/${id}`)
@@ -69,9 +70,7 @@ const Sukses = () => {
 
   const handlePayButton = async (e) => {
     const today = new Date();
-    const converse2 = today.toLocaleString("id-ID", {
-      timeZone: "Asia/Jakarta",
-    });
+    const converse2 = today.toLocaleString().replace(",", "");
 
     let data = {
       id_tables: id,
@@ -83,7 +82,7 @@ const Sukses = () => {
       total_bayar: totalBayar,
       name: tableDetail.name,
       no_telp: tableDetail.no_telp,
-      time_start: tableDetail.time_start,
+      time_end: converse2,
       kode,
       status: false,
     };
@@ -131,9 +130,7 @@ const Sukses = () => {
   const handleDisini = async (e) => {
     setModalOpen(true);
     const today = new Date();
-    const converse2 = today.toLocaleString("id-ID", {
-      timeZone: "Asia/Jakarta",
-    });
+    const converse2 = today.toLocaleString().replace(",", "");
 
     menu?.forEach((element) => {
       console.log(element, "ini harusnya cuma 2, karena datanya cuma 2");
@@ -153,7 +150,7 @@ const Sukses = () => {
       total_bayar: totalBayar,
       name: tableDetail.name,
       no_telp: tableDetail.no_telp,
-      time_start: tableDetail.time_start,
+      time_end: converse2,
       status: false,
       kode: kode,
     };
@@ -203,7 +200,17 @@ const Sukses = () => {
               pesanan meja #{tableDetail?.table_name}
             </Card.Title>
             <Card.Subtitle className=" text-muted">
-              {tableDetail?.time_start}
+              {new Date(tableDetail?.time_start)
+                .toLocaleString("id-ID", {
+                  timeZone: "Asia/Jakarta",
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "2-digit",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                })
+                .replaceAll(".", ":")}
             </Card.Subtitle>
             <Card.Text className="text-center text-black">
               Menu yang dipesan

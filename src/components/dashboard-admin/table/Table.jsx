@@ -101,24 +101,28 @@ const Table = () => {
                 {filteredData.map((element, index) => {
                   const dateStartObject = new Date(element.time_start);
                   const dateEndObject = new Date(element.time_end);
-                  const timeEnd = dateEndObject.toLocaleString("id-ID", {
-                    timeZone: "Asia/Jakarta",
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "2-digit",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit",
-                  });
-                  const timeStart = dateStartObject.toLocaleString("id-ID", {
-                    timeZone: "Asia/Jakarta",
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "2-digit",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit",
-                  });
+                  const timeEnd = dateEndObject
+                    .toLocaleString("id-ID", {
+                      timeZone: "Asia/Jakarta",
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                    })
+                    .replaceAll(".", ":");
+                  const timeStart = dateStartObject
+                    .toLocaleString("id-ID", {
+                      timeZone: "Asia/Jakarta",
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                    })
+                    .replaceAll(".", ":");
                   return (
                     <React.Fragment key={element.id_tables}>
                       <tr

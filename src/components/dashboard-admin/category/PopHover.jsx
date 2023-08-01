@@ -45,7 +45,7 @@ const PopHover = ({ element }) => {
         <button
           data-popover-target="popover-default"
           type="button"
-          class={`text-white ${
+          className={`text-white ${
             element.status.toLowerCase() === "true"
               ? "bg-green-700"
               : "bg-red-700"
@@ -66,10 +66,10 @@ const PopHover = ({ element }) => {
           <div
             id="tooltip-default"
             role="tooltip"
-            class="absolute top-[-35px] left-[-45px] z-10 inline-block px-3 py-2 text-sm font-medium text-white duration-300 bg-gray-900 rounded-lg shadow-sm dark:bg-gray-700"
+            className="absolute top-[-35px] left-[-45px] z-10 inline-block px-3 py-2 text-sm font-medium text-white duration-300 bg-gray-900 rounded-lg shadow-sm dark:bg-gray-700"
           >
             Klik untuk mengubah status
-            <div class="tooltip-arrow" data-popper-arrow></div>
+            <div className="tooltip-arrow" data-popper-arrow></div>
           </div>
         )}
       </div>

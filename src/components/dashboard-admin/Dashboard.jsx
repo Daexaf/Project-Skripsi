@@ -7,7 +7,7 @@ import { Fragment } from "react";
 
 const Dashboard = () => {
   const [viewData, setViewData] = useState([]);
-  const [isPopOverOpen, setIsPopOverOpen] = useState(false);
+  // const [isPopOverOpen, setIsPopOverOpen] = useState(false);
   // const [selectedId, setSelectedId] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -91,16 +91,18 @@ const Dashboard = () => {
               </thead>
               <tbody>
                 {filteredData.map((element, index) => {
-                  const dateObject = new Date(element.time_start);
-                  const formattedDate = dateObject.toLocaleString("id-ID", {
-                    timeZone: "Asia/Jakarta",
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "2-digit",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    second: "2-digit",
-                  });
+                  const dateObject = new Date(element.time_end);
+                  const formattedDate = dateObject
+                    .toLocaleString("id-ID", {
+                      timeZone: "Asia/Jakarta",
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                    })
+                    .replaceAll(".", ":");
                   return (
                     <Fragment key={`${element.id_receipt} ${index}`}>
                       {console.log(element, "ini element")}
