@@ -28,7 +28,10 @@ export const LoginUser = () => {
       return;
     }
     const today = new Date();
-    const converse2 = today.toLocaleString().replace(",", "");
+    // const converse2 = today.toLocaleString().replace(",", "");
+    const converse2 = `${
+      today.getMonth() + 1
+    }/${today.getDate()}/${today.getFullYear()} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
 
     // setCurrentTime(converse2);
     console.log(converse2, "waktu");

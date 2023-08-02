@@ -70,7 +70,9 @@ const Sukses = () => {
 
   const handlePayButton = async (e) => {
     const today = new Date();
-    const converse2 = today.toLocaleString().replace(",", "");
+    const converse2 = `${
+      today.getMonth() + 1
+    }/${today.getDate()}/${today.getFullYear()} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
 
     let data = {
       id_tables: id,
@@ -130,7 +132,9 @@ const Sukses = () => {
   const handleDisini = async (e) => {
     setModalOpen(true);
     const today = new Date();
-    const converse2 = today.toLocaleString().replace(",", "");
+    const converse2 = `${
+      today.getMonth() + 1
+    }/${today.getDate()}/${today.getFullYear()} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
 
     menu?.forEach((element) => {
       console.log(element, "ini harusnya cuma 2, karena datanya cuma 2");
