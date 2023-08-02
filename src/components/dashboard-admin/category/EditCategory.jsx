@@ -33,9 +33,7 @@ const EditCategory = () => {
     };
     axios
       .put(API_URL2 + `categories/${id_categories}`, updatedData)
-      .then((res) => {
-        console.log(res);
-      });
+      .then((res) => {});
     navigate("/Admin/category");
   };
 

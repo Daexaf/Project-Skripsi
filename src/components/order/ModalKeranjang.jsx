@@ -15,7 +15,6 @@ const ModalKeranjang = ({
   kurang,
   setKeranjangs,
 }) => {
-  // console.log(keranjangDetail, "detail");
   const [keterangan, setKeterangan] = useState("");
 
   const handleChangeKeterangan = (event) => {
@@ -36,16 +35,12 @@ const ModalKeranjang = ({
       keterangan: keterangan,
     };
 
-    console.log(keranjangDetail.id_keranjangs, "id keranjang");
-    console.log(keranjangDetail, "id table");
-
     await axios.put(API_URL2 + `keranjangs/${id_k}`, data);
 
     const updatedData = await axios.get(
       API_URL2 + `keranjangs?id_tables=${id_table}`
     );
     setKeranjangs(updatedData.data.data);
-    console.log(updatedData, "trigger");
     handleClose();
   };
 

@@ -14,10 +14,6 @@ export const Login = () => {
     setContoh(true);
   }, []);
 
-  useEffect(() => {
-    console.log(contoh, "contoh dari login");
-  }, [contoh]);
-
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -42,7 +38,6 @@ export const Login = () => {
       } else if (!username.length && password.length) {
         alert("lupa username lu");
       }
-      console.log(username);
     });
   };
   return (

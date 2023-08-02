@@ -14,7 +14,6 @@ const FeedbackForm = () => {
 
   useEffect(() => {
     axios.get(API_URL2 + `table/${id}`).then((res) => {
-      console.log(res.data.data[0], "ini ga ada idnya");
       setDatac(res.data.data[0]);
     });
   }, [id]);
@@ -38,8 +37,6 @@ const FeedbackForm = () => {
       };
 
       const response = await axios.post(API_URL2 + "review", feedbackData);
-      console.log(response.data);
-
       setRating(0);
       setComment("");
     } catch (error) {

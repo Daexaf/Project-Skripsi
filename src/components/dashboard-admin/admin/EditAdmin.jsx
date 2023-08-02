@@ -39,9 +39,7 @@ const EditAdmin = () => {
       email: email,
       password: password,
     };
-    axios.put(API_URL2 + `admin/${id_admins}`, updatedData).then((res) => {
-      console.log(res);
-    });
+    axios.put(API_URL2 + `admin/${id_admins}`, updatedData).then((res) => {});
     navigate("/Admin/adminAcc");
   };
 

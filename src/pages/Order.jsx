@@ -38,7 +38,6 @@ const Order = () => {
         console.log("Error ya ", error);
       });
   }, [categoryChoose, id_tables]);
-  // console.log(keranjangs, "hmmmmmmmmmmmmmmm");
 
   const changeCategory = (value) => {
     setCategoryChoose(value);
@@ -57,23 +56,18 @@ const Order = () => {
   const masukKeranjang = async (value) => {
     const product = await axios.get(API_URL2 + "product/" + value.id_products);
     let keranjangData;
-    // console.log(product, "ini get product");
     let finder;
     try {
       keranjangData = await axios.get(
         API_URL2 + `keranjangs?id_tables=${id_tables}`
       );
-      console.log(keranjangData, "keranjang data");
       finder = Object.values(keranjangData.data.data).find((e) => {
-        // console.log(finder, "finder data");
         return e.product[0].id_products === value.id_products;
       });
-      console.log(finder, "ini finder 2");
     } catch {
       finder = false;
     }
     if (finder) {
-      console.log("ini kalo salah");
       const keranjang = {
         jumlah: finder.jumlah + 1,
         total_harga: finder.total_harga + Number(value.harga),
@@ -96,7 +90,6 @@ const Order = () => {
         API_URL2 + `keranjangs?id_tables=${id_tables}`
       );
       setKeranjangs(blablabla.data.data);
-      console.log(blablabla, "bla data");
     } else {
       const data = {
         jumlah: 1,

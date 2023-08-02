@@ -14,7 +14,6 @@ const NavbarComponent = () => {
           <div
             className="logo cursor-pointer"
             onClick={() => {
-              console.log("trigre");
               navigate(`/home/${id_tables}`);
             }}
           >

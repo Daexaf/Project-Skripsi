@@ -17,14 +17,12 @@ const MenuPack = () => {
         const response = await axios.get(API_URL2 + "product/"); // Ganti dengan URL endpoint yang sesuai
         const data = response.data.data;
         setProducts(data);
-        console.log(data, "ini data");
       } catch (error) {
         console.log("Error:", error);
       }
     };
 
     axios.get(API_URL2 + "categories").then((res) => {
-      console.log(res.data.data);
       const cate = res.data.data;
       setCategories(cate);
     });

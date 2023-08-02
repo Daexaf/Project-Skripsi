@@ -37,7 +37,6 @@ const Table = () => {
   };
 
   const deleteData = (id_tables) => {
-    console.log(id_tables);
     axios.delete(API_URL2 + `table/${id_tables}`).then((res) => {
       const newValue = viewData.filter((e) => {
         return e.id_tables !== id_tables;
@@ -46,8 +45,6 @@ const Table = () => {
       setOpenModal(false);
     });
   };
-
-  console.log(viewData, "ini datanya");
 
   return (
     <>
@@ -92,37 +89,13 @@ const Table = () => {
                     Waktu Masuk
                   </th>
                   <th scope="col" className="py-3 px-6">
-                    Waktu Order
+                    Waktu Keluar
                   </th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 {filteredData.map((element, index) => {
-                  // const dateStartObject = new Date(element.time_start);
-                  // const dateEndObject = new Date(element.time_end);
-                  // const timeEnd = dateEndObject
-                  //   .toLocaleString("id-ID", {
-                  //     timeZone: "Asia/Jakarta",
-                  //     day: "2-digit",
-                  //     month: "2-digit",
-                  //     year: "2-digit",
-                  //     hour: "2-digit",
-                  //     minute: "2-digit",
-                  //     second: "2-digit",
-                  //   })
-                  //   .replaceAll(".", ":");
-                  // const timeStart = dateStartObject
-                  //   .toLocaleString("id-ID", {
-                  //     timeZone: "Asia/Jakarta",
-                  //     day: "2-digit",
-                  //     month: "2-digit",
-                  //     year: "2-digit",
-                  //     hour: "2-digit",
-                  //     minute: "2-digit",
-                  //     second: "2-digit",
-                  //   })
-                  //   .replaceAll(".", ":");
                   return (
                     <React.Fragment key={element.id_tables}>
                       <tr
@@ -142,7 +115,7 @@ const Table = () => {
                           {element.time_start}
                         </td>
                         <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
-                          {element.time_end}
+                          {element.time_logout}
                         </td>
                         <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
                           <div className="flex space-x-2">

@@ -17,7 +17,6 @@ const Dashboard = () => {
       .then((res) => {
         const showData = res.data.data;
         setViewData(showData);
-        console.log(showData);
       })
       .catch((error) => {
         console.log("Error ya ", error);
@@ -105,7 +104,6 @@ const Dashboard = () => {
                     .replaceAll(".", ":");
                   return (
                     <Fragment key={`${element.id_receipt} ${index}`}>
-                      {console.log(element, "ini element")}
                       <tr
                         className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                         key={element.id_receipt}

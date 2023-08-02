@@ -31,7 +31,6 @@ const Testimonials = () => {
       try {
         const response = await axios.get(API_URL2 + "review");
         setData(response.data.data); // Mengatur state comment dengan data review dari API
-        console.log(response.data.data, "isi response");
       } catch (error) {
         console.error("Terjadi kesalahan dalam mengambil data review:", error);
       }

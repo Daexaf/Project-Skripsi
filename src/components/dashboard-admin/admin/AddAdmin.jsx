@@ -18,7 +18,6 @@ const AddAdmin = () => {
         password: password,
       })
       .then((response) => {
-        console.log(response.data);
         navigate("/admin/adminAcc");
       })
       .catch((error) => {

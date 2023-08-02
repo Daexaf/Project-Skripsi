@@ -14,10 +14,8 @@ const Home = () => {
   const navigate = useNavigate();
   let { id_tables } = useParams();
   const [tableN, setTableN] = useState("");
-  // console.log(id_tables, "ini id home");
 
   useEffect(() => {
-    // console.log(tableN, "table data");
     setTimeout(() => {
       navigate(`/table/${tableN}`);
     }, 1800000);

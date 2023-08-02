@@ -38,7 +38,6 @@ const Header = () => {
 
   useEffect(() => {
     axios.get(API_URL2 + `table/${id_tables}`).then((res) => {
-      console.log(res.data.data[0], "ini ga ada idnya");
       setdatac(res.data.data[0]);
     });
   }, [id_tables]);
@@ -59,11 +58,25 @@ const Header = () => {
       window.removeEventListener("popstate", preventBackNavigation);
     };
   }, []);
-
-  // console.log(datac.table_name, "ini datac");
   const nameT = datac.table_name;
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    const today = new Date();
+    const converse2 = `${
+      today.getMonth() + 1
+    }/${today.getDate()}/${today.getFullYear()} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+
+    let dataPushtable = {
+      id_tables: datac.id_tables,
+      name: datac.name,
+      no_telp: datac.no_telp,
+      table_name: datac.table_name,
+      time_start: datac.time_start,
+      time_end: datac.time_end,
+      time_logout: converse2,
+    };
+
+    await axios.put(API_URL2 + `table/${datac.id_tables}`, dataPushtable);
     window.alert("Terima Kasih telah mengunjungi Sop Duren 87");
     navigate(`/table/${nameT}`);
   };
@@ -72,7 +85,6 @@ const Header = () => {
 
     navigate(`/Order/${id_tables}`);
   };
-  console.log(typeof datac.time_start, "ini data c");
 
   return (
     <header className="header">

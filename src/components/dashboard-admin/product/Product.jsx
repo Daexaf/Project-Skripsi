@@ -16,7 +16,6 @@ const Product = () => {
       .then((res) => {
         const showData = res.data.data;
         setViewData(showData);
-        console.log(showData);
       })
       .catch((error) => {
         console.log("Error ya ", error);
@@ -24,7 +23,6 @@ const Product = () => {
   }, []);
 
   const deleteData = (id_products) => {
-    console.log(id_products);
     axios.delete(API_URL2 + `product/${id_products}`).then((res) => {
       const newValue = viewData.filter((e) => {
         return e.id_products !== id_products;

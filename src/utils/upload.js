@@ -24,7 +24,6 @@ const handleUpload = (file) => {
       // download url
       getDownloadURL(uploadTask.snapshot.ref).then((url) => {
         gambar = url;
-        console.log(url);
       });
     }
   );

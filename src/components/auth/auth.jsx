@@ -44,7 +44,6 @@ const AuthPages = () => {
         {
           size: "invisible",
           callback: (response) => {
-            console.log(response);
             // reCAPTCHA solved, allow signInWithPhoneNumber.
             onSignInSubmit();
           },

@@ -27,14 +27,17 @@ export const LoginUser = () => {
       });
       return;
     }
+    if (noTelp.length < 13) {
+      setErrorMsg({
+        ...errorMsg,
+        noTelp: "nomor telepon anda tidak mencapai batas minimum, coba lagi",
+      });
+      return;
+    }
     const today = new Date();
-    // const converse2 = today.toLocaleString().replace(",", "");
     const converse2 = `${
       today.getMonth() + 1
     }/${today.getDate()}/${today.getFullYear()} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
-
-    // setCurrentTime(converse2);
-    console.log(converse2, "waktu");
 
     let data = {
       table_name: id,
@@ -48,7 +51,6 @@ export const LoginUser = () => {
       const alamat = res.data.data[0].id_tables;
       dispatch(table_name(id));
       navigate(`/Home/${alamat}`);
-      console.log(res);
     });
   };
 
@@ -78,13 +80,18 @@ export const LoginUser = () => {
           </label>
           <input
             className="p-2  text-black"
-            type="number"
+            type="text"
             min="0"
             placeholder="Masukkan Nomor Telepon anda"
             id="phone"
             name="phone"
             value={noTelp}
-            onChange={(e) => setNoTelp(e.target.value)}
+            onChange={(e) => {
+              var reg = /^\d+$/;
+              if (!e.target.value.indexOf(reg)) return;
+              if (e.target.value.length === 14) return;
+              setNoTelp(e.target.value);
+            }}
             required
           />
           {errorMsg.noTelp && <p>{errorMsg.noTelp}</p>}

@@ -54,7 +54,6 @@ const AddProduct = () => {
         // download url
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           setAddGambar(url);
-          console.log(url);
         });
       }
     );
@@ -63,8 +62,6 @@ const AddProduct = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     handleUpload(file);
-    // setFile(e.target.files[0]);
-    // console.log(e.target.files[0], "coba");
   };
 
   const handleIsActiveChange = (event) => {
@@ -83,7 +80,6 @@ const AddProduct = () => {
         id_category: selectedCategory,
       })
       .then((response) => {
-        console.log(response.data);
         navigate("/admin/product");
       })
       .catch((error) => {

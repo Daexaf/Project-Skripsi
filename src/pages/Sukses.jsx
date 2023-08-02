@@ -6,6 +6,8 @@ import "./sukses.css";
 import { API_URL2 } from "../utils/constants";
 import numberWithCommas from "../utils/utils";
 import { Helmet } from "react-helmet";
+import { useDispatch } from "react-redux";
+import { table_name, timeData } from "../app/counterSlice";
 
 const Sukses = () => {
   const { id } = useParams();
@@ -15,8 +17,7 @@ const Sukses = () => {
   const [totalBayar, setTotalBayar] = useState(0);
   const [kode, setKode] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
-
-  console.log("tableDetail: ", tableDetail);
+  const dispatch = useDispatch();
   useEffect(() => {
     axios
       .get(API_URL2 + `table/${id}`)
@@ -54,7 +55,6 @@ const Sukses = () => {
     calculateTotalBayar();
 
     menu?.forEach((element) => {
-      console.log(element, "ini harusnya cuma 2, karena datanya cuma 2");
       setKode((prev) => {
         return [
           ...prev,
@@ -102,12 +102,26 @@ const Sukses = () => {
         onSuccess: function (result) {
           /* You may add your own implementation here */
           alert("Pembayaran Berhasil, Terima kasih");
-          console.log(result);
           dataPush.status = true;
           axios.post(API_URL2 + "receipt", dataPush);
           axios.put(API_URL2 + `table/${id}`, dataPushtable);
           axios.delete(API_URL2 + `keranjangs?id_tables=${id}`);
-          navigate(`/home/${id}`);
+
+          let data = {
+            table_name: tableDetail.table_name,
+            name: tableDetail.name,
+            no_telp: tableDetail.no_telp,
+            time_start: converse2,
+          };
+
+          dispatch(timeData(Date.now()));
+          axios.post(API_URL2 + `table/`, data).then((res) => {
+            const alamat = res.data.data[0].id_tables;
+            dispatch(table_name(tableDetail.table_name));
+            navigate(`/Home/${alamat}`);
+          });
+
+          // navigate(`/home/${id}`);
         },
         onPending: function (result) {
           /* You may add your own implementation here */
@@ -137,7 +151,6 @@ const Sukses = () => {
     }/${today.getDate()}/${today.getFullYear()} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
 
     menu?.forEach((element) => {
-      console.log(element, "ini harusnya cuma 2, karena datanya cuma 2");
       setKode((prev) => {
         return [
           ...prev,

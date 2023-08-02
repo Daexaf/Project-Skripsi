@@ -2,7 +2,6 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 function ModalProdcut({ setOpenModal, deleteData, id_products }) {
-  console.log(id_products);
   return (
     <>
       <div

@@ -13,7 +13,6 @@ const EditTable = () => {
       .then((res) => {
         const showData = res.data.data;
         setData(showData);
-        console.log(showData);
       })
       .catch((error) => {
         console.log("Error ya ", error);

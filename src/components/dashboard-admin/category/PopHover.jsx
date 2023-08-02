@@ -13,7 +13,7 @@ const PopHover = ({ element }) => {
     const string = "Apakah anda yakin?";
 
     if (window.confirm(string)) {
-      const res = await axios.put(API_URL2 + `receipt/${element.id_receipts}`, {
+      await axios.put(API_URL2 + `receipt/${element.id_receipts}`, {
         id_receipts: element.id_receipts,
         name: element.name,
         no_telp: element.no_telp,
@@ -22,10 +22,7 @@ const PopHover = ({ element }) => {
         kode: element.kode,
         status: element.status.toLowerCase() === "true" ? false : true,
       });
-
-      console.log(res, "res");
     } else {
-      console.log("");
     }
   };
 

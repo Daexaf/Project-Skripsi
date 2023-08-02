@@ -16,7 +16,6 @@ const AddCategory = () => {
     axios
       .post(API_URL2 + "categories", { name: addData })
       .then((response) => {
-        console.log(response.data);
         navigate("/admin/category");
       })
       .catch((error) => {

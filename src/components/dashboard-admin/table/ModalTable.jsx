@@ -2,7 +2,6 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 function ModalTable({ setOpenModal, deleteData, id_tables }) {
-  console.log(id_tables);
   return (
     <>
       <div

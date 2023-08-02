@@ -53,8 +53,6 @@ const EditProduct = () => {
       () => {
         // download url
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          // setData({ ...data, gambar: url });
-          // console.log(url);
           setData((prevState) => ({
             ...prevState,
             gambar: url,
@@ -66,8 +64,6 @@ const EditProduct = () => {
 
   const handleImageChange = (e) => {
     handleUpload(e.target.files[0]);
-    // setFile(e.target.files[0]);
-    // console.log(e.target.files[0], "coba");
   };
 
   useEffect(() => {
@@ -85,13 +81,9 @@ const EditProduct = () => {
       });
   }, [id_products, id_categories]);
 
-  console.log(data, "data");
-
   const handleSubmitData = (e) => {
     e.preventDefault();
-    console.log(data, "data data dtaa");
     axios.put(API_URL2 + `product/${id_products}`, data).then((res) => {
-      console.log(res);
       navigate("/admin/product");
     });
   };
