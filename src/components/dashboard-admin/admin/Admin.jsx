@@ -68,10 +68,10 @@ const AdminAcc = () => {
               </thead>
               <tbody>
                 {viewData.map((element, index) => (
-                  <>
+                  <React.Fragment key={element.id_admins}>
                     <tr
                       className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                      key={index}
+                      key={element.id_admins}
                     >
                       <td className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-black">
                         {element.username}
@@ -143,7 +143,7 @@ const AdminAcc = () => {
                         id_admins={selectedId}
                       />
                     )}
-                  </>
+                  </React.Fragment>
                 ))}
               </tbody>
             </table>
