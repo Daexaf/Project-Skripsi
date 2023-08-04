@@ -9,6 +9,7 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [contoh, setContoh] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     setContoh(true);
@@ -22,23 +23,27 @@ export const Login = () => {
       password: password,
     };
 
-    axios.get(API_URL2 + "admin/").then((res) => {
-      const data = res.data.data;
-      const username = data.filter((e) => {
-        return e.username === loginData.username;
+    axios
+      .get(API_URL2 + "admin/")
+      .then((res) => {
+        const data = res.data.data;
+        const matchedAdmin = data.find(
+          (admin) =>
+            admin.username === loginData.username &&
+            admin.password === loginData.password
+        );
+
+        if (matchedAdmin) {
+          navigate("/admin/dashboard");
+          localStorage.setItem("id_admins", matchedAdmin.id_admins);
+        } else {
+          setErrorMsg("Username atau password salah");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        setErrorMsg("Terjadi kesalahan saat proses login");
       });
-      const password = data.filter((e) => {
-        return e.password === loginData.password;
-      });
-      if (username.length && password.length) {
-        navigate("/admin/dashboard");
-        localStorage.setItem("id_admins", username[0].id_admins);
-      } else if (username.length && !password.length) {
-        alert("lupa password kali");
-      } else if (!username.length && password.length) {
-        alert("lupa username lu");
-      }
-    });
   };
   return (
     <div className="App tulisan">
@@ -80,6 +85,7 @@ export const Login = () => {
           <button type="submit" className="btn btn-success submit mb-2">
             Login
           </button>
+          {errorMsg && <p className="text-red-500">{errorMsg}</p>}
         </form>
         <button className="link-btn" onClick={() => navigate("/Register")}>
           Don't have an account? Register here.

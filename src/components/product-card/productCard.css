@@ -1,7 +1,6 @@
 .single__product {
     background: #141124;
     border-radius: 10px;
-    cursor: pointer;
     animation: animate 1s ease-in;
   }
   

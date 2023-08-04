@@ -100,7 +100,7 @@ const Product = () => {
               </thead>
               <tbody>
                 {filteredData.map((element, index) => (
-                  <>
+                  <React.Fragment key={element.id_products}>
                     <tr
                       className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                       key={element.id_products}
@@ -157,7 +157,7 @@ const Product = () => {
                         id_products={selectedId}
                       />
                     )}
-                  </>
+                  </React.Fragment>
                 ))}
               </tbody>
             </table>

@@ -17,20 +17,20 @@ export const LoginUser = () => {
   const handleSubmitLogin = (e) => {
     e.preventDefault();
     if (!name) {
-      setErrorMsg({ ...errorMsg, name: "silahkan masukkan nama anda" });
+      setErrorMsg({ ...errorMsg, name: "Silahkan masukkan nama anda" });
       return;
     }
     if (!noTelp) {
       setErrorMsg({
         ...errorMsg,
-        noTelp: "silahkan masukkan nomor telepon anda",
+        noTelp: "Silahkan masukkan nomor telepon anda",
       });
       return;
     }
     if (noTelp.length < 13) {
       setErrorMsg({
         ...errorMsg,
-        noTelp: "nomor telepon anda tidak mencapai batas minimum, coba lagi",
+        noTelp: "Nomor telepon anda tidak mencapai batas minimum, coba lagi",
       });
       return;
     }
@@ -57,7 +57,7 @@ export const LoginUser = () => {
   return (
     <div className="App">
       <div className="auth-form-container">
-        <form className="login-form">
+        <form className="login-form" onSubmit={handleSubmitLogin}>
           <h2 className="text-center p-5">
             Selamat datang di Website Restoran Sop DUREN 97
           </h2>
@@ -65,48 +65,40 @@ export const LoginUser = () => {
             Nama:
           </label>
           <input
-            className="p-2 mb-2  text-black"
+            className="p-2 mb-2 text-black"
             type="text"
             placeholder="Masukkan Nama Anda"
             id="name"
             name="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            required
           />
           {errorMsg.name && <p>{errorMsg.name}</p>}
           <label htmlFor="phone" className="text-white">
             Nomor Telepon:
           </label>
           <input
-            className="p-2  text-black"
+            className="p-2 mb-2 text-black"
             type="text"
-            min="0"
-            placeholder="Masukkan Nomor Telepon anda"
+            placeholder="Masukkan Nomor Telepon Anda"
             id="phone"
             name="phone"
             value={noTelp}
             onChange={(e) => {
-              var reg = /^\d+$/;
-              if (!e.target.value.indexOf(reg)) return;
+              var reg = /^[0-9]*$/;
+              if (!e.target.value.match(reg)) return;
               if (e.target.value.length === 14) return;
               setNoTelp(e.target.value);
             }}
-            required
+            minLength="13"
+            maxLength="14"
+            pattern="^[0-9]*$"
           />
           {errorMsg.noTelp && <p>{errorMsg.noTelp}</p>}
-          <button
-            type="submit"
-            className="btn btn-success submit mb-2"
-            value="submit"
-            onClick={(e) => handleSubmitLogin(e)}
-          >
+          <button type="submit" className="btn btn-success submit mb-2">
             Masuk
           </button>
         </form>
-        {/* <button className="link-btn" onClick={() => navigate("/Register")}>
-          Don't have an account? Register here.
-        </button> */}
       </div>
     </div>
   );
