@@ -52,7 +52,10 @@ const Dashboard = () => {
                 padding: "8px",
               }}
             />
-            <button className="mr-5" onClick={() => setSearchQuery("")}>
+            <button
+              className="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white mr-5"
+              onClick={() => setSearchQuery("")}
+            >
               Hapus
             </button>
             {/* <Link
