@@ -16,12 +16,12 @@ const Sidebar = () => {
   };
   return (
     <div
-      className="bg-[#4E73DF] h-screen fixed z px-[25px] "
+      className="bg-[#4E73DF] h-screen fixed z px-[20px] "
       style={{ zIndex: 1000 }}
     >
       <div className="px-[15px] py-[30px] flex items-center justify-center border-b-[1px] border-[#ededed]/[0.3]">
         <h1 className="text-white text-[15px] leading-[24px] font-extrabold cursor-pointer">
-          Admin Panel
+          Admin Dashboard
         </h1>
       </div>
       <Link to="dashboard">

@@ -38,9 +38,9 @@ const EditCategory = () => {
   };
 
   return (
-    <div className="py-12 bg-blue-500 ">
-      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-blue-500">
-        <div className="flex m-2 p-2 bg-blue-500">
+    <div className="py-12">
+      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div className="flex m-2 p-2">
           <Link
             to="/Admin/category"
             className="px-4 py-2 bg-green-500 hover:bg-indigo-700 rounded-lg text-white text-decoration-none"
@@ -53,11 +53,8 @@ const EditCategory = () => {
         ) : (
           <>
             {filderData.map((index) => (
-              <div
-                className="m-2 p-2 bg-slate-100 rounded border border-black"
-                key={index}
-              >
-                <div className="space-y-8 divide-y divide-gray-200 w-1/2 mt-5 border border-black">
+              <div className="m-2 p-2 bg-slate-100 rounded" key={index}>
+                <div className="space-y-8 divide-y divide-gray-200 w-1/2">
                   <form method="PUT" encType="multipart/form-data">
                     <div className="sm:col-span-6">
                       <label
@@ -71,7 +68,7 @@ const EditCategory = () => {
                           type="text"
                           id="name"
                           name="name"
-                          className="block w-full transition duration-150 ease-in-out appearance-none border border-blue-800 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                          className="block w-full transition duration-150 ease-in-out appearance-none border border-black rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                           value={inputName}
                           onChange={(e) => {
                             setInputName(e.target.value);

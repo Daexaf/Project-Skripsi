@@ -56,7 +56,12 @@ const Table = () => {
               value={filterValue}
               onChange={(e) => setFilterValue(e.target.value)}
               placeholder="Filter berdasarkan nama pengguna"
-              className="px-4 py-2 border border-gray-300 rounded-lg mr-2"
+              className="mr-2"
+              style={{
+                border: "3px solid #ccc",
+                borderRadius: "4px",
+                padding: "8px",
+              }}
             />
             <button
               onClick={handleFilter}

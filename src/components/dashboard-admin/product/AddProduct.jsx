@@ -87,7 +87,7 @@ const AddProduct = () => {
       });
   };
   return (
-    <div className="space-y-8 divide-y divide-gray-200 w-1/2 mt-5 border border-black">
+    <div className="space-y-8 divide-y divide-gray-200 w-1/2 mt-5 ml-10">
       <form method="PUT" encType="multipart/form-data">
         <div className="sm:col-span-6">
           <label
@@ -101,7 +101,7 @@ const AddProduct = () => {
               type="text"
               id="kode"
               name="kode"
-              className="block w-full transition duration-150 ease-in-out appearance-none border border-blue-800 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+              className="block w-full transition duration-150 ease-in-out appearance-none border border-black rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
               value={addKode}
               onChange={(e) => {
                 setAddKode(e.target.value);
@@ -123,7 +123,7 @@ const AddProduct = () => {
               type="text"
               id="name"
               name="name"
-              className="block w-full transition duration-150 ease-in-out appearance-none border border-blue-800 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+              className="block w-full transition duration-150 ease-in-out appearance-none border border-black rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
               value={addName}
               onChange={(e) => {
                 setAddName(e.target.value);
@@ -145,7 +145,7 @@ const AddProduct = () => {
               type="number"
               id="harga"
               name="harga"
-              className="block w-full transition duration-150 ease-in-out appearance-none border border-blue-800 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+              className="block w-full transition duration-150 ease-in-out appearance-none border border-black rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
               value={addHarga}
               onChange={(e) => {
                 setAddHarga(e.target.value);

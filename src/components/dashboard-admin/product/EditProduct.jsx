@@ -89,9 +89,9 @@ const EditProduct = () => {
   };
 
   return (
-    <div className="py-12 bg-blue-500 ">
-      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-blue-500">
-        <div className="flex m-2 p-2 bg-blue-500">
+    <div className="py-12">
+      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div className="flex m-2 p-2">
           <Link
             to="/Admin/product"
             className="px-4 py-2 bg-green-500 hover:bg-indigo-700 rounded-lg text-white text-decoration-none"
@@ -100,8 +100,8 @@ const EditProduct = () => {
           </Link>
         </div>
         {data && (
-          <div className="m-2 p-2 bg-slate-100 rounded border border-black">
-            <div className="space-y-8 divide-y divide-gray-200 w-1/2 mt-5 border border-black">
+          <div className="m-2 p-2 bg-slate-100 rounded border">
+            <div className="space-y-8 divide-y divide-gray-200 w-1/2 border-black">
               <form method="POST" encType="multipart/form-data">
                 <div className="sm:col-span-6">
                   <label
@@ -115,7 +115,7 @@ const EditProduct = () => {
                       type="text"
                       id="name"
                       name="name"
-                      className="block w-full transition duration-150 ease-in-out appearance-none border border-blue-800 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                      className="block w-full transition duration-150 ease-in-out appearance-none border border-black rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                       value={data.kode}
                       onChange={(e) => {
                         setData({ ...data, kode: e.target.value });
@@ -137,7 +137,7 @@ const EditProduct = () => {
                       type="text"
                       id="name"
                       name="name"
-                      className="block w-full transition duration-150 ease-in-out appearance-none border border-blue-800 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                      className="block w-full transition duration-150 ease-in-out appearance-none border border-black rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                       value={data.name}
                       onChange={(e) => {
                         setData({ ...data, name: e.target.value });
@@ -159,7 +159,7 @@ const EditProduct = () => {
                       type="number"
                       id="name"
                       name="name"
-                      className="block w-full transition duration-150 ease-in-out appearance-none border border-blue-800 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                      className="block w-full transition duration-150 ease-in-out appearance-none border border-black rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                       value={data.harga}
                       onChange={(e) => {
                         setData({ ...data, harga: e.target.value });
@@ -220,7 +220,7 @@ const EditProduct = () => {
                     <select
                       id="id_category"
                       name="id_category"
-                      className="block w-full transition duration-150 ease-in-out appearance-none border border-blue-800 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                      className="block w-full transition duration-150 ease-in-out appearance-none border border-black rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                       value={data.id_category}
                       onChange={(e) => {
                         setData({ ...data, id_category: e.target.value });
