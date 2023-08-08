@@ -76,7 +76,7 @@ export default class Hasil extends Component {
     return (
       <Col md={6} lg={4} xl={3} mt="2">
         <h4>
-          <strong>Hasil</strong>
+          <strong>Keranjang</strong>
         </h4>
         <hr />
         <Card className="overflow-auto hasil" style={{ cursor: "pointer" }}>
